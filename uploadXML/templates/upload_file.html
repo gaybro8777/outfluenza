@@ -1,0 +1,12 @@
+<h1>Upload XML File</h1>
+
+<form action="{% url "uploadxml" %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <ul>
+    {{ form.as_ul }}
+  </ul>
+  <input id="save_contact" type="submit" value="Save" />
+</form>
+
+<a href="{% url "messages-list" %}">back to list</a>
+<a href="">Delete All Messages</a>

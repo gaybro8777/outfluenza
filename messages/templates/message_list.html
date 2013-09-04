@@ -1,0 +1,30 @@
+<h1>Messages</h1>
+
+<table>
+<tr class="column_titles">
+	<td>Message ID</td>
+	<td>Written Date</td>
+	<td>Product Code</td>
+	<td>Refills Quantity</td>
+	<td>Patient Zipcode</td>
+	<td>Patient Gender</td>
+	<td>Patient DOB</td>
+	<td>Prescriber LastName</td>
+	<td>Prescriber Zipcode</td>
+	<td>Pharmacy Zipcode</td>
+</tr>
+{% for message in allMessages %}
+  <tr>
+  	<td>{{ message.messageID }}</td>
+  	<td>{{ message.writtenDate }}</td>
+  	<td>{{ message.productCode }}</td>
+  	<td>{{ message.refillsQuantity }}</td>
+  	<td>{{ message.patientZipcode }}</td>
+  	<td>{{ message.patientGender }}</td>
+  	<td>{{ message.patientDob }}</td>
+  	<td>{{ message.prescriberLastName }}</td>
+  	<td>{{ message.prescriberZipcode }}</td>
+  	<td>{{ message.pharmacyZipcode }}</td>
+  </tr>
+{% endfor %}
+</table>
