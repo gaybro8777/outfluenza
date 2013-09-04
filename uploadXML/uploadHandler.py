@@ -6,16 +6,13 @@ import time
 TAG_PREFIX = '{http://www.surescripts.com/messaging}'
 
 def handleUpload(file):
-	i = 1
 	for line in file:
 		try:
 			xmlObj = etree.fromstring(line)
 			message = createMessage(xmlObj)
-			print(i)
-			i += 1
 			message.save()
 		except:
-			print("ERROR: " + line)
+			pass
 
 def createMessage(root):
 	message = Message().defaultFields()
