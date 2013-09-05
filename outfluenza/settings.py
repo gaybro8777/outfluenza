@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     'messages',
     'uploadXML',
     'bootstrap_toolkit',
+    'zipcodes',
 )
 
 # A sample logging configuration. The only tangible logging

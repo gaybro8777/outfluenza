@@ -1,4 +1,5 @@
 from messages.models import Message
+from zipcodes.zipcodeHandler import handleZipcode
 import xml.etree.cElementTree as etree
 import datetime
 import time
@@ -11,7 +12,8 @@ def handleUpload(file):
 			xmlObj = etree.fromstring(line)
 			message = createMessage(xmlObj)
 			message.save()
-		except:
+			handleZipcode(message)
+		except Exception as inst:
 			pass
 
 def createMessage(root):

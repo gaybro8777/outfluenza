@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 import messages.views
 import uploadXML.views
+import zipcodes.views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -17,8 +18,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^messages/$', messages.views.ListMessageView,
-        name='messages-list',),
-    url(r'^upload/$', uploadXML.views.UploadFileView,
-    	name='uploadxml'),
+    url(r'^messages/$', messages.views.ListMessageView, name = 'messages-list',),
+    url(r'^upload/$', uploadXML.views.UploadFileView, name = 'uploadxml'),
+    url(r'^zipcodes/$', zipcodes.views.ListZipcodeView, name = 'zipcodes-list'),
 )
