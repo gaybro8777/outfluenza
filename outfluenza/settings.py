@@ -13,11 +13,13 @@ ALLOWED_HOSTS = ['*']
 # Static asset configuration
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = '/app/static/'
 STATIC_URL = '/static/'
 
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    'static/',
 )
 
 # Django settings for outfluenza project.
@@ -65,7 +67,7 @@ MEDIA_ROOT = ''
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
+MEDIA_URL = 'http://outfluenza.herokuapp.com/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -138,6 +140,7 @@ INSTALLED_APPS = (
     'uploadXML',
     'bootstrap_toolkit',
     'zipcodes',
+    'homepage'
 )
 
 # A sample logging configuration. The only tangible logging
