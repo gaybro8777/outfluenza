@@ -48,7 +48,6 @@ button.minimal {
     
 .header {
 	padding: 20px 0 0 0;
-    width: 910px;
     height: 103px;
     background-color: #fff;
     text-align: center;
@@ -90,8 +89,8 @@ button.minimal {
     position: absolute;
     width: 200px;
     height: 586px;
-    top: 17px;
-    left: 920px;
+    top: 0px;
+    right: 0px;
     background-color: #f6f6f6;
     padding: 10px;
 }
@@ -121,7 +120,7 @@ button {
 
 .states {
   fill: none;
-  stroke: #fff;
+  stroke: #000;
   stroke-linejoin: round;
 }
 

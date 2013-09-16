@@ -11,7 +11,7 @@ def handleUpload(file):
 		try:
 			xmlObj = etree.fromstring(line)
 			message = createMessage(xmlObj)
-			message.save()
+			#message.save()
 			handleZipcode(message)
 		except Exception as inst:
 			pass

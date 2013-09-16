@@ -1,4 +1,4 @@
-var width = 910,
+var width = Math.max(910,document.documentElement["clientWidth"]),
     height = 500,
 	centered;
 
@@ -16,8 +16,8 @@ var path = d3.geo.path()
 	.projection(projection);
 
 queue()
-    .defer(d3.json, "static/js/us.json")
-    .defer(d3.tsv, "static/js/influenza.tsv", function(d) { rateById.set(d.id, +d.rate); })
+    .defer(d3.json, "static/data/us_states_topo.json")
+    .defer(d3.tsv, "static/data/influenza.tsv", function(d) { rateById.set(d.id, +d.rate); })
     .await(ready);
 
 var g;
@@ -33,30 +33,32 @@ function ready(error, us) {
 	.on("click", clicked);
 
   g = svg.append("g")
-	
+
   g.append("g")
-      .attr("class", "counties")
+      .attr("class", "states")
     .selectAll("path")
-      .data(topojson.feature(us, us.objects.counties).features)
+      .data(topojson.feature(us, us.objects.us_states).features)
     .enter().append("path")
-      .attr("class", function(d) { return quantize(rateById.get(d.id)); })
+      .attr("class", function(d) {
+      	return "q0-9";//quantize(rateById.get(d.id)); 
+      })
       .attr("d", path)
   	  .on("click", clicked);
 
-  g.append("path")
-      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+  /*g.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return true; }))
       .attr("class", "states")
-      .attr("d", path);
+      .attr("d", path);*/
 }
 
 function clicked(d) {
 	var x, y, k;
-	
+
 	if (d && centered !== d) {
 	    var centroid = path.centroid(d);
 	    x = centroid[0];
 	    y = centroid[1];
-	    k = 8;
+	    k = 3;
 	    centered = d;
 	  } else {
 	    x = width / 2;
