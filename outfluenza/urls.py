@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^messages/$', messages.views.ListMessageView, name = 'messages-list',),
     url(r'^upload/$', uploadXML.views.UploadFileView, name = 'uploadxml'),
     url(r'^zipcodes/$', zipcodes.views.ListZipcodeView, name = 'zipcodes-list'),
+    url(r'^zipcodesjson/$', homepage.views.ZipcodesJson, name = 'zipcodesjson'),
     url(r'^$', homepage.views.HomepageView, name = 'homepage'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

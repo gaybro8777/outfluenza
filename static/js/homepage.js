@@ -17,38 +17,37 @@ var path = d3.geo.path()
 
 queue()
     .defer(d3.json, "static/data/us_states_topo.json")
-    .defer(d3.tsv, "static/data/influenza.tsv", function(d) { rateById.set(d.id, +d.rate); })
+    .defer(d3.json, "/zipcodesjson")
     .await(ready);
 
 var g;
-function ready(error, us) {
-  var svg = d3.select("#interactiveMap").append("svg")
-	.attr("width", width)
-	.attr("height", height);
+function ready(error, us, states) {
 
-  svg.append("rect")
-	.attr("class", "background")
-	.attr("width", width)
-	.attr("height", height)
-	.on("click", clicked);
+	var bucketDict = assignBuckets(us.objects.state.geometries, states)
+	
+	var svg = d3.select("#interactiveMap").append("svg")
+		.attr("width", width)
+		.attr("height", height);
 
-  g = svg.append("g")
+	svg.append("rect")
+		.attr("class", "background")
+		.attr("width", width)
+		.attr("height", height)
+		.on("click", clicked);
 
-  g.append("g")
-      .attr("class", "states")
-    .selectAll("path")
-      .data(topojson.feature(us, us.objects.us_states).features)
-    .enter().append("path")
-      .attr("class", function(d) {
-      	return "q0-9";//quantize(rateById.get(d.id)); 
-      })
-      .attr("d", path)
-  	  .on("click", clicked);
+	g = svg.append("g")
 
-  /*g.append("path")
-      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return true; }))
-      .attr("class", "states")
-      .attr("d", path);*/
+	g.append("g")
+	    .attr("class", "states")
+	    .selectAll("path")
+	    .data(topojson.feature(us, us.objects.state).features)
+	    .enter().append("path")
+	    .attr("class", function(d) {
+	    	var bucket = bucketDict[d.properties.STUSPS10];
+	      	return "q" + (bucket ? bucket.fields.bucket : 0) + "-9"; 
+	      })
+	    .attr("d", path)
+	  	.on("click", clicked);
 }
 
 function clicked(d) {

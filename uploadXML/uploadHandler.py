@@ -1,6 +1,7 @@
 from messages.models import Message
 from zipcodes.zipcodeHandler import handleZipcode
 import xml.etree.cElementTree as etree
+from xml.etree.cElementTree import ParseError as ParseError
 import datetime
 import time
 
@@ -13,8 +14,8 @@ def handleUpload(file):
 			message = createMessage(xmlObj)
 			#message.save()
 			handleZipcode(message)
-		except Exception as inst:
-			pass
+		except ParseError as inst:
+			print(inst)
 
 def createMessage(root):
 	message = Message().defaultFields()

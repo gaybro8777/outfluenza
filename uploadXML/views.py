@@ -10,7 +10,7 @@ def UploadFileView(request):
 	if request.method == 'POST':
 		form = UploadFileForm(request.POST, request.FILES)
 		handleUpload(request.FILES['file'])
-		return HttpResponseRedirect('/messages')
+		return HttpResponseRedirect('/zipcodes')
 	template = loader.get_template('upload_file.html')
 	context = RequestContext(request, {
 			'form' : UploadFileForm(),

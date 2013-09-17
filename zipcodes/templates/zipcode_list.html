@@ -1,6 +1,6 @@
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<!--link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script-->
 
 <h1>Zipcodes</h1>
 
@@ -8,6 +8,7 @@
   <thead>
     <tr class="column_titles">
       <th>Zipcode</th>
+      <th>State</th>
     	<th>Prescriber Cases</th>
       <th>Patient Cases</th>
     	<th>Pharmacy Cases</th>
@@ -17,6 +18,7 @@
     {% for zipcode in allZipcodes %}
       <tr>
         <td>{{ zipcode.zipcode }}</td>
+        <td>{{ zipcode.state }}</td>
       	<td>{{ zipcode.prescriberCases }}</td>
       	<td>{{ zipcode.patientCases }}</td>
         <td>{{ zipcode.pharmacyCases }}</td>
