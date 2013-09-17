@@ -7,7 +7,6 @@ from django.utils import simplejson
 TOTAL_BUCKETS = 10
 
 def handleZipcode(message):
-	print(message)
 	if message.prescriberZipcode:
 		zipcodes = Zipcode.objects.filter(zipcode__exact = message.prescriberZipcode)
 		if len(zipcodes) > 0:
@@ -15,7 +14,6 @@ def handleZipcode(message):
 			zipcodes[0].save()
 		else:
 			new_zipcode = Zipcode().defaultFields(message.prescriberZipcode)			
-			print(new_zipcode)
 			new_zipcode.prescriberCases += 1
 			new_zipcode.save()
 
@@ -52,7 +50,6 @@ def assignBuckets(states):
 		if counter >= per_bucket:
 			counter = 0
 			curr_bucket += 1
-
 
 def orderZipcodesIntoSortedStates():
 	states = Zipcode.objects.values('state').annotate(num_cases=Sum('patientCases')).order_by('num_cases')

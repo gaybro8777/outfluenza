@@ -21,10 +21,14 @@ class Zipcode(models.Model):
 		self.prescriberCases = 0
 		self.patientCases = 0
 		self.pharmacyCases = 0
-		try:
-			self.state = zipcodes_to_state.zipcodes_to_state[zipcode]
-		except KeyError:
-			self.state = 'AK' #TODO: do something smart here.
+		temp = zipcode
+		while not self.state:
+			try:
+				self.state = zipcodes_to_state.zipcodes_to_state[temp]
+			except KeyError:
+				temp -= 1
+			if zipcode - temp > 30:
+				self.state = 'AK'
 		return self
 
 class State(models.Model):
