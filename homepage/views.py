@@ -3,6 +3,7 @@ from django.template import RequestContext, loader
 from zipcodes.models import Zipcode
 import json
 from django.core import serializers
+from outfluenza.settings import STATIC_URL
 from homepage.homepageHandler import orderZipcodesIntoSortedStates, orderZipcodesFromState
 
 def HomepageView(request):
