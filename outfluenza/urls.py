@@ -21,10 +21,16 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
 
+    # List Requests
     url(r'^messages/$', messages.views.ListMessageView, name = 'messages-list',),
     url(r'^upload/$', uploadXML.views.UploadFileView, name = 'uploadxml'),
     url(r'^zipcodes/$', zipcodes.views.ListZipcodeView, name = 'zipcodes-list'),
-    url(r'^zipcodesjson/$', homepage.views.ZipcodesJson, name = 'zipcodesjson'),
+
+    # Data Requests
+    url(r'^statesjson/$', homepage.views.StatesJson, name = 'statesjson'),
+    url(r'^zipcodesjson/(?P<state>[A-Z]{2})$', homepage.views.ZipcodesJson, name = 'zipcodesjson'),
+
+    # Homepage
     url(r'^$', homepage.views.HomepageView, name = 'homepage'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

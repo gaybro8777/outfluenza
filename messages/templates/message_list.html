@@ -8,30 +8,28 @@
   <thead>
     <tr class="column_titles">
     	<th>Message ID</th>
+      <th>Zipcode</th>
+      <th>State</th>
     	<th>Written Date</th>
     	<th>Product Code</th>
     	<th>Refills Quantity</th>
-    	<th>Patient Zipcode</th>
     	<th>Patient Gender</th>
     	<th>Patient DOB</th>
     	<th>Prescriber LastName</th>
-    	<th>Prescriber Zipcode</th>
-    	<th>Pharmacy Zipcode</th>
     </tr>
   </thead>
   <tbody>
     {% for message in allMessages %}
       <tr>
       	<td>{{ message.messageID }}</td>
+        <td>{{ message.zipcode }}</td>
+        <td>{{ message.state }}</td>
       	<td>{{ message.writtenDate }}</td>
       	<td>{{ message.productCode }}</td>
       	<td>{{ message.refillsQuantity }}</td>
-      	<td>{{ message.patientZipcode }}</td>
       	<td>{{ message.patientGender }}</td>
       	<td>{{ message.patientDob }}</td>
       	<td>{{ message.prescriberLastName }}</td>
-      	<td>{{ message.prescriberZipcode }}</td>
-      	<td>{{ message.pharmacyZipcode }}</td>
       </tr>
     {% endfor %}
   </tbody>

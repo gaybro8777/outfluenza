@@ -11,15 +11,16 @@
 	<script src="{{ STATIC_URL }}js/queue.v1.min.js"></script>
 	<script src="{{ STATIC_URL }}js/topojson.v1.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepageHelper.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/homepageMap.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/homepageStatistics.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepage.js"></script>
     <div class="header">
         <span class="maintitle">Live Influenza Tracking</span>
         <br /><span class="subtitle">
         Realtime information on the spread of influenza</span>
     </div>
-    <div id="interactiveMap">
-    	<!-- to be populated by Javascript code -->
-    </div>
+    <div id="interactiveMap"></div>
+    <div id="statistics"></div>
    	<div class="nav">
     	<span class="title">where are you?</span><br />
     Get detailed information about a specific area.

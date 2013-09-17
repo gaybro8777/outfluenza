@@ -1,5 +1,4 @@
 from django.db import models
-import zipcodes_to_state
 
 class Zipcode(models.Model):
 	zipcode = models.IntegerField(primary_key = True)
@@ -16,20 +15,14 @@ class Zipcode(models.Model):
 		output += ', Pharmacy Zipcode: ' + str(self.pharmacyCases)
 		return output
 
-	def defaultFields(self, zipcode):
+	def defaultFields(self, zipcode, state):
 		self.zipcode = zipcode
 		self.prescriberCases = 0
 		self.patientCases = 0
 		self.pharmacyCases = 0
-		temp = zipcode
-		while not self.state:
-			try:
-				self.state = zipcodes_to_state.zipcodes_to_state[temp]
-			except KeyError:
-				temp -= 1
-			if zipcode - temp > 30:
-				self.state = 'AK'
+		self.state = state
 		return self
+
 
 class State(models.Model):
 	name = models.CharField(max_length = 2, primary_key = True)

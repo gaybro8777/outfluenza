@@ -1,5 +1,5 @@
 from messages.models import Message
-from zipcodes.zipcodeHandler import handleZipcode
+from zipcodeHandler import handleZipcode, getStateForZipcode
 import xml.etree.cElementTree as etree
 from xml.etree.cElementTree import ParseError as ParseError
 import datetime
@@ -12,7 +12,7 @@ def handleUpload(file):
 		try:
 			xmlObj = etree.fromstring(line)
 			message = createMessage(xmlObj)
-			#message.save()
+			message.save()
 			handleZipcode(message)
 		except ParseError as inst:
 			print(inst)
@@ -34,7 +34,17 @@ def createMessage(root):
 	# Handle Pharmacy here
 	for pharmacy in root.iter(TAG_PREFIX + 'Pharmacy'):
 		handlePharmacy(message, pharmacy)
+	handleGeographicData(message)
 	return message
+
+def handleGeographicData(message):
+	if message.patientZipcode:
+		message.zipcode = message.patientZipcode
+	elif message.prescriberZipcode:
+		message.zipcode = message.prescriberZipcode
+	else:
+		message.zipcode = message.pharmacyZipcode
+	message.state = getStateForZipcode(message.zipcode)
 
 def stringToDatetime(timeString, timeFormat):
 	return datetime.datetime.fromtimestamp(time.mktime(time.strptime(timeString, timeFormat)))
