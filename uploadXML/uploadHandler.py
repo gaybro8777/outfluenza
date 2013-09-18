@@ -8,6 +8,7 @@ import time
 TAG_PREFIX = '{http://www.surescripts.com/messaging}'
 
 def handleUpload(file):
+	i = 0
 	for line in file:
 		try:
 			xmlObj = etree.fromstring(line)
@@ -15,7 +16,9 @@ def handleUpload(file):
 			message.save()
 			handleZipcode(message)
 		except ParseError as inst:
-			print(inst)
+			print(i)
+			pass
+		i += 1
 
 def createMessage(root):
 	message = Message().defaultFields()
@@ -68,6 +71,7 @@ def handleMedication(message, medication):
 		message.productCode = productCode.text
 	for date in medication.iter(TAG_PREFIX + 'WrittenDate'):
 		message.writtenDate = stringToDatetime(date.text, "%Y%m%d")
+		#message.writtenDate = message.writtenDate.replace(day = 1)
 	for refills in medication.iter(TAG_PREFIX + 'Refills'):
 		for quantity in refills.iter(TAG_PREFIX + 'Quantity'):
 			message.refillsQuantity = int(quantity.text)

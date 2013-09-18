@@ -33,12 +33,12 @@ class Message(models.Model):
 
 	def defaultFields(self):
 		self.messageID = ""
-		self.writtenDate = datetime.datetime.now()
+		self.writtenDate = datetime.date(1000, 1, 1)
 		self.productCode = ""
 		self.refillsQuantity = 0
 		self.patientZipcode = 0
 		self.patientGender = "M"
-		self.patientDob = datetime.datetime.now()
+		self.patientDob = datetime.date(1000, 1, 1)
 		self.prescriberLastName = ""
 		self.prescriberZipcode = 0
 		self.pharmacyZipcode = 0

@@ -47,7 +47,7 @@ button.minimal {
     color: #000; }
     
 .header {
-	padding: 20px 0 0 0;
+	  padding: 20px 0 0 0;
     height: 103px;
     background-color: #fff;
     text-align: center;
@@ -90,7 +90,7 @@ button.minimal {
     width: 200px;
     height: 586px;
     top: 0px;
-    right: 0px;
+    left: 0px;
     background-color: #f6f6f6;
     padding: 10px;
 }

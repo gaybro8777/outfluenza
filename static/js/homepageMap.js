@@ -1,28 +1,29 @@
-var width = Math.max(910,document.documentElement["clientWidth"]),
-    height = 500,
-	centered;
-
-var projection = d3.geo.albersUsa()
-	.scale(1070)
-	.translate([width / 2, height / 2]);
-	
-var rateById = d3.map();
-
-var quantize = d3.scale.quantize()
-    .domain([0, .15])
-    .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
-
-var path = d3.geo.path()
-	.projection(projection);
-
-var g;
 function updateMap(error, us, states) {
+	var width = Math.max(1100,document.documentElement["clientWidth"]),
+	    height = 500,
+	    margin = {top: 20, right: 20, bottom: 30, left: 130}, centered;
+
+	var projection = d3.geo.albersUsa()
+		.scale(1070)
+		.translate([width / 2 + margin.left, height / 2]);
+		
+	var rateById = d3.map();
+
+	var quantize = d3.scale.quantize()
+	    .domain([0, .15])
+	    .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+
+	var path = d3.geo.path()
+		.projection(projection);
+
+	var g;
 
 	var bucketDict = assignBuckets(us.objects.state.geometries, states)
 	
 	var svg = d3.select("#interactiveMap").append("svg")
 		.attr("width", width)
-		.attr("height", height);
+		.attr("height", height)
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	svg.append("rect")
 		.attr("class", "background")

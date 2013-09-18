@@ -28,6 +28,8 @@ urlpatterns = patterns('',
 
     # Data Requests
     url(r'^statesjson/$', homepage.views.StatesJson, name = 'statesjson'),
+    url(r'^ustimegraphjson/$', homepage.views.USTimeGraph, name = 'USTimeGraphJson'),
+    url(r'^statesstatisticjson/$', homepage.views.StatesStatisticJson, name = 'statesStatisticJson'),
     url(r'^zipcodesjson/(?P<state>[A-Z]{2})$', homepage.views.ZipcodesJson, name = 'zipcodesjson'),
 
     # Homepage

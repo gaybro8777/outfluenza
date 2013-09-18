@@ -1,6 +1,7 @@
 from zipcodes.models import Zipcode
+from messages.models import Message
 from django.db.models import Sum
-from zipcodes.models import State
+from homepage.models import State
 
 TOTAL_BUCKETS = 10
 
@@ -26,3 +27,7 @@ def orderZipcodesIntoSortedStates():
 
 def orderZipcodesFromState(state):
 	return Zipcode.objects.filter(state__exact = state)
+
+def orderMessagesIntoSortedStates():
+	messages = Message.objects.values('state')
+	print(messages)

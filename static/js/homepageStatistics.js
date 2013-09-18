@@ -1,31 +1,32 @@
-var width = Math.max(910,document.documentElement["clientWidth"]),
-    height = 500,
-    centered;
+function updateStatistics(error, stateStatistics) {
+  var width = 910,
+      height = 500,
+      margin = {top: 20, right: 20, bottom: 30, left: 50};
 
-var parseDate = d3.time.format("%d-%b-%y").parse;
+  var parseDate = d3.time.format("%Y-%m-%d").parse;
 
-var x = d3.time.scale()
-    .range([0, width]);
+  var x = d3.time.scale()
+      .range([0, width]);
 
-var y = d3.scale.linear()
-    .range([height, 0]);
+  var y = d3.scale.linear()
+      .range([height, 0]);
 
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom");
 
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left");
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left");
 
-var line = d3.svg.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.close); });
+  var line = d3.svg.line()
+      .x(function(d) { return x(d.date); })
+      .y(function(d) { return y(d.num); });
 
-function updateStatistics(error, us, states) {
-  states.forEach(function(d) {
-    d.date = parseDate(d.date);
-    d.close = +d.close;
+  stateStatistics.forEach(function(d) {
+    d.date = parseDate(d.fields.date);
+    console.log(d.date)
+    d.num = d.fields.num;
   });
 
   var svg = d3.select("#statistics").append("svg")
@@ -34,8 +35,8 @@ function updateStatistics(error, us, states) {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain(d3.extent(data, function(d) { return d.close; }));
+  x.domain(d3.extent(stateStatistics, function(d) { return d.date; }));
+  y.domain(d3.extent(stateStatistics, function(d) { return d.num; }));
 
   svg.append("g")
       .attr("class", "x axis")
@@ -53,7 +54,7 @@ function updateStatistics(error, us, states) {
       .text("Number of Influenza occurences");
 
   svg.append("path")
-      .datum(data)
+      .datum(stateStatistics)
       .attr("class", "line")
       .attr("d", line);
 };
