@@ -144,7 +144,8 @@ INSTALLED_APPS = (
     'uploadXML',
     'bootstrap_toolkit',
     'zipcodes',
-    'homepage'
+    'homepage',
+    'south'
 )
 
 # A sample logging configuration. The only tangible logging
