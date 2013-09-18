@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-import messages.views
+import message.views
 import uploadXML.views
 import zipcodes.views
 import homepage.views
@@ -22,7 +22,7 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 
     # List Requests
-    url(r'^messages/$', messages.views.ListMessageView, name = 'messages-list',),
+    url(r'^messages/$', message.views.ListMessageView, name = 'messages-list',),
     url(r'^upload/$', uploadXML.views.UploadFileView, name = 'uploadxml'),
     url(r'^zipcodes/$', zipcodes.views.ListZipcodeView, name = 'zipcodes-list'),
 

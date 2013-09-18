@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from zipcodes.models import Zipcode
-from messages.models import Message
+from message.models import Message
 from homepage.models import USTimeGraphJson
 import json
 from django.core import serializers

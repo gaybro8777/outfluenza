@@ -1,5 +1,5 @@
 from zipcodes.models import Zipcode
-from messages.models import Message
+from message.models import Message
 from django.db.models import Sum
 from homepage.models import State
 

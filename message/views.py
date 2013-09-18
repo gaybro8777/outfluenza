@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.template import RequestContext, loader
-from messages.models import Message
+from message.models import Message
 
 
 def ListMessageView(request):

@@ -1,4 +1,4 @@
-from messages.models import Message
+from message.models import Message
 from zipcodes.models import Zipcode
 import zipcodes_to_state
 

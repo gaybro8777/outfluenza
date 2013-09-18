@@ -1,4 +1,4 @@
-from messages.models import Message
+from message.models import Message
 from zipcodeHandler import handleZipcode, getStateForZipcode
 import xml.etree.cElementTree as etree
 from xml.etree.cElementTree import ParseError as ParseError
