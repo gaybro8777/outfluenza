@@ -145,7 +145,7 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     'zipcodes',
     'homepage',
-    'south'
+    #'south'
 )
 
 # A sample logging configuration. The only tangible logging

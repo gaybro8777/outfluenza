@@ -43,10 +43,10 @@ function updateMap(error, us, states) {
 	      	return "q" + (bucket ? bucket.fields.bucket : 0) + "-9"; 
 	      })
 	    .attr("d", path)
-	  	.on("click", clicked);
+	  	.on("click", function(d) { return clicked(d, width, height, centered); });
 }
 
-function clicked(d) {
+function clicked(d, width, height, centered) {
 	var x, y, k;
 
 	if (d && centered !== d) {
