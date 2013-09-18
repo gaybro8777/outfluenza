@@ -20,6 +20,7 @@ SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 STATICFILES_DIRS = (
     'static/',
+    'app/static/',
 )
 
 # Django settings for outfluenza project.
@@ -123,7 +124,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    'static/templates'
+    'static/templates',
+    'app/static/templates'
 )
 
 INSTALLED_APPS = (
