@@ -14,7 +14,7 @@ ALLOWED_HOSTS = ['*']
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = '/app/static/'
-STATIC_URL = '/static/'
+STATIC_URL = '/app/static/'
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
