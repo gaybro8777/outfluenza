@@ -13,14 +13,15 @@ ALLOWED_HOSTS = ['*']
 # Static asset configuration
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = '/app/static/'
-STATIC_URL = '/app/static/'
+PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 STATICFILES_DIRS = (
     'static/',
-    'app/static/',
+    os.path.join(PROJECT_PATH, 'static'),
 )
 
 # Django settings for outfluenza project.
