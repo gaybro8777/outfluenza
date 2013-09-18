@@ -25,7 +25,6 @@ function updateStatistics(error, stateStatistics) {
 
   stateStatistics.forEach(function(d) {
     d.date = parseDate(d.fields.date);
-    console.log(d.date)
     d.num = d.fields.num;
   });
 

@@ -1,4 +1,5 @@
-function updateMap(error, us, states) {
+(function($){
+$.fn.updateMap = function(error, us, states) {
 	var width = Math.max(1100,document.documentElement["clientWidth"]),
 	    height = 500,
 	    margin = {top: 20, right: 20, bottom: 30, left: 130}, centered;
@@ -43,30 +44,37 @@ function updateMap(error, us, states) {
 	      	return "q" + (bucket ? bucket.fields.bucket : 0) + "-9"; 
 	      })
 	    .attr("d", path)
-	  	.on("click", function(d) { return clicked(d, width, height, centered); });
+	  	.on("click", function(d) { return clicked(d, width, height); });
+
+
+	g.selectAll('path').each(function(d){
+        $(this).popover({trigger:'hover', title:d.properties.NAME10, placement:'top', content:"content", container:"body"});
+    });
+
+	var clicked = function(d, width, height) {
+		var x, y, k;
+
+		if (d && centered !== d) {
+		    var centroid = path.centroid(d);
+		    x = centroid[0];
+		    y = centroid[1];
+		    k = 3;
+		    centered = d;
+		  } else {
+		    x = width / 2;
+		    y = height / 2;
+		    k = 1;
+		    centered = null;
+		  }
+
+		  g.selectAll("path")
+		      .classed("active", centered && function(d) { return d === centered; });
+
+		  g.transition()
+		      .duration(750)
+		      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+		      .style("stroke-width", 1.5 / k + "px");
+	}
+
 }
-
-function clicked(d, width, height, centered) {
-	var x, y, k;
-
-	if (d && centered !== d) {
-	    var centroid = path.centroid(d);
-	    x = centroid[0];
-	    y = centroid[1];
-	    k = 3;
-	    centered = d;
-	  } else {
-	    x = width / 2;
-	    y = height / 2;
-	    k = 1;
-	    centered = null;
-	  }
-
-	  g.selectAll("path")
-	      .classed("active", centered && function(d) { return d === centered; });
-
-	  g.transition()
-	      .duration(750)
-	      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-	      .style("stroke-width", 1.5 / k + "px");
-}
+})(jQuery);

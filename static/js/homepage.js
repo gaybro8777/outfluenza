@@ -7,6 +7,7 @@ queue()
     .await(ready);
 
 function ready(error, us, states, stateStatistics) {
-	updateMap(error, us, states);
+	var $usmap = $('#interactiveMap');
+    $usmap.updateMap(error, us, states);
 	updateStatistics(error, stateStatistics);
 }
