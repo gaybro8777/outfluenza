@@ -34,6 +34,7 @@ urlpatterns = patterns('',
 
     # Homepage
     url(r'^$', homepage.views.HomepageView, name = 'homepage'),
+    url(r'^state/(?P<state>[A-Z]{2})$', homepage.views.StateView, name = 'stateView'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if not settings.DEBUG:

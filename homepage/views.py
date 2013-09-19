@@ -9,13 +9,25 @@ from django.db.models import Count
 from outfluenza.settings import STATIC_URL
 from homepage.homepageHandler import orderZipcodesIntoSortedStates, orderZipcodesFromState, orderMessagesIntoSortedStates
 
+################################
+# Views
+
 def HomepageView(request):
     template = loader.get_template('homepage.html')
     context = RequestContext(request)
     return HttpResponse(template.render(context))
 
+def StateView(request, state):
+	template = loader.get_template('state.html')
+	context = RequestContext(request, {'state':state})
+	return HttpResponse(template.render(context))
+
+################################
+# Data
+
 def ZipcodesJson(request, state):
 	state = orderZipcodesFromState(state)
+	print(state)
 	return HttpResponse(serializers.serialize("json", state, ensure_ascii=False))
 
 def StatesJson(request):
