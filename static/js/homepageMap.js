@@ -19,7 +19,7 @@ $.fn.updateMap = function(error, us, states) {
 
 	var g;
 
-	var bucketDict = assignBuckets(us.objects.state.geometries, states)
+	var bucketDict = assignBuckets(states)
 	
 	var svg = d3.select("#interactiveMap").append("svg")
 		.attr("width", width)

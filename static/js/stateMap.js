@@ -1,5 +1,10 @@
 (function($){
-$.fn.updateMap = function(error, state, states) {
+$.fn.updateMap = function(error, state, zipcodes) {
+	
+	var firstKey = function(obj) {
+    for (var a in obj) return a;
+	}
+
 	var width = Math.max(1100,document.documentElement["clientWidth"]),
 	    height = 500,
 	    margin = {top: 20, right: 20, bottom: 30, left: 130}, centered;
@@ -19,8 +24,8 @@ $.fn.updateMap = function(error, state, states) {
 
 	var g;
 
-	//var bucketDict = assignBuckets(us.objects.state.geometries, states)
-	
+	var bucketDict = assignBucketsToZipcodes(zipcodes)
+
 	var svg = d3.select("#interactiveMap").append("svg")
 		.attr("width", width)
 		.attr("height", height)
@@ -37,11 +42,11 @@ $.fn.updateMap = function(error, state, states) {
 	g.append("g")
 	    .attr("class", "counties")
 	    .selectAll("path")
-	    .data(topojson.feature(state, state.objects.zcta5).features)
+	    .data(topojson.feature(state, state.objects[firstKey(state.objects)]).features)
 	    .enter().append("path")
 	    .attr("class", function(d) {
-	    	//var bucket = bucketDict[d.properties.STUSPS10];
-	      	return "q" + 5 + "-9"; 
+	    	var bucket = bucketDict[d.properties.ZCTA5CE10];
+	      	return "q" + (bucket ? bucket.fields.bucket : 2) + "-9"; 
 	      })
 	    .attr("d", path)
 	  	.on("click", function(d) { return clicked(d, width, height); });
