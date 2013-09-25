@@ -22,6 +22,16 @@ def StateView(request, state):
 	context = RequestContext(request, {'state':state})
 	return HttpResponse(template.render(context))
 
+def TeamView(request):
+	template = loader.get_template('team.html')
+	context = RequestContext(request)
+	return HttpResponse(template.render(context))
+
+def InstructionsView(request):
+	template = loader.get_template('instructions.html')
+	context = RequestContext(request)
+	return HttpResponse(template.render(context))
+
 ################################
 # Data
 

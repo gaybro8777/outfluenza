@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+{% load staticfiles %}
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <title>Outfluenza</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/d3.v3.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/queue.v1.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/topojson.v1.min.js"></script>
+  </head>
+  <body>
+    <div class="header">
+        <span class="maintitle">Live Influenza Tracking</span>
+        <br /><span class="subtitle">
+        Realtime information on the spread of influenza</span>
+    </div>
+
+    <nav class="navbar navbar-default" role="navigation" style="top:10px;">
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter ZIP">
+            </div>
+            <button type="submit" class="custom btn btn-default">GO</button>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter State">
+            </div>
+            <button type="submit" class="custom btn btn-default">GO</button>
+        </form>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navElement"><a href="/">
+                    <i class="icon-home"></i> Home
+                </a></li>
+                <li class="navElement"><a href="/team">
+                    <i class="icon-user"></i> Team
+                </a></li>
+                <li class="navElement" style="padding-right:30px;"><a href="/instructions">
+                    <i class="icon-book"></i> How it works
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    {% block extra_header %}
+    {% endblock %}
+
+
+    {% block content %}
+    {% endblock %}
+
+    {% block footer %}
+    {% endblock %}
+
+    <div class="navbar navbar-default" role="navigation" style="top:10px; bottom:0px;"></div>
+  </body>
+</html>

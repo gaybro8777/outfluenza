@@ -35,6 +35,8 @@ urlpatterns = patterns('',
     # Homepage
     url(r'^$', homepage.views.HomepageView, name = 'homepage'),
     url(r'^state/(?P<state>[A-Z]{2})$', homepage.views.StateView, name = 'stateView'),
+    url(r'^team/$', homepage.views.TeamView, name = 'team'),
+    url(r'^instructions/$', homepage.views.InstructionsView, name = 'instructions'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if not settings.DEBUG:
