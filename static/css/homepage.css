@@ -27,6 +27,11 @@
 	stroke-linejoin: round;
 }
 
+.us-map {
+  padding-left: 100px;
+  padding-top: 10px;
+}
+
 button {
     font-family: helvetica;
 }
@@ -49,8 +54,8 @@ button {
 }
 
 .line {
-  fill: none;
-  stroke: steelblue;
+  /*fill: none;*/
+  stroke: #fff;
   stroke-width: 1.5px;
 }
 

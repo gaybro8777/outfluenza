@@ -1,8 +1,83 @@
 (function($){
-$.fn.updateMap = function(error, us, states) {
+$.fn.updateMap = function(error, us, messages) {
 	var width = Math.max(1100,document.documentElement["clientWidth"]),
 	    height = 700,
 	    margin = {top: 20, right: 20, bottom: 30, left: 130}, centered;
+
+    var numberFormat = d3.format(".2f");
+
+    var usChart = dc.geoChoroplethChart("#interactiveMap");
+    var genderChart = dc.pieChart("#genderChart");
+    //var roundChart = dc.bubbleChart("#round-chart");
+
+    var collectData = function (csv) {
+    	console.log(csv[0])
+        var data = crossfilter(csv);
+		
+        var states = data.dimension(function (d) {
+            return d.fields.state;
+        });
+        
+        var stateRaisedSum = states.group().reduceSum(function (d) {
+            return 1;
+        });
+		
+        var genders = data.dimension(function (d) {
+            return d.fields.patientGender;
+        });
+        var statsByGender = genders.group().reduceSum(function (d) {
+            return 1;
+        });
+
+        /*var rounds = data.dimension(function (d) {
+            return d["RoundClassDescr"];
+        });
+        var statsByRounds = rounds.group().reduce(
+                function (p, v) {
+                    p.amountRaised += +v["Raised"];
+                    p.deals += +v["Deals"];
+                    return p;
+                },
+                function (p, v) {
+                    p.amountRaised -= +v["Raised"];
+                    if (p.amountRaised < 0.001) p.amountRaised = 0; // do some clean up
+                    p.deals -= +v["Deals"];
+                    return p;
+                },
+                function () {
+                    return {amountRaised: 0, deals: 0}
+                }
+    	);*/
+    	
+        usChart.width(1090)
+            .height(700)
+            .dimension(states)
+            .group(stateRaisedSum)
+            .colors(["#ccc", "#DEEBF7", "#C6DBEE", "#9ECAE1", "#6BAED6", "#4292C6", "#2171B5", "#08519C", "#08306B", "#082854"])
+            .colorDomain([-5, 200])
+            .overlayGeoJson(us.features, "state", function (d) {
+                return d.properties.name;
+            })
+            .title(function (d) {
+            	//console.log(d)
+                return "State: " + d.key + "\nTotal Amount Raised: " + 0 + "M";
+            });
+
+        genderChart.width(200)
+        	.height(200)
+        	.transitionDuration(500)
+    		.dimension(genders) // set dimension
+    		.group(statsByGender)
+
+        dc.renderAll();
+    };
+	collectData(messages);
+
+	d3.selectAll('path').attr('class', 'line');
+
+/*
+	var temp = function(error, us, states) {
+	
 
 	var projection = d3.geo.albersUsa()
 		.scale(1070)
@@ -62,6 +137,7 @@ $.fn.updateMap = function(error, us, states) {
 		content += '<b>Rate of Spread: </b> ' + rateOfSpread;
         $(this).popover({trigger:'hover', html:"true", title:d.properties.NAME10, placement:'top', content:content, container:"body"});
     });
+	}
 
 	var clicked = function(d, width, height) {
 		var x, y, k;
@@ -87,7 +163,7 @@ $.fn.updateMap = function(error, us, states) {
 		      .duration(750)
 		      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
 		      .style("stroke-width", 1.5 / k + "px");
-	}
+	}*/
 
 }
 })(jQuery);

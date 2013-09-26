@@ -31,6 +31,7 @@ urlpatterns = patterns('',
     url(r'^ustimegraphjson/$', homepage.views.USTimeGraph),
     url(r'^statesstatisticjson/$', homepage.views.StatesStatisticJson),
     url(r'^zipcodesjson/(?P<state>[A-Z]{2})$', homepage.views.ZipcodesJson),
+    url(r'^messagesjson/', homepage.views.MessagesJson),
 
     # Search Requests
     url(r'^findZipcode/(?P<zipcode>[0-9]+)$', homepage.views.ZipcodeSearch),

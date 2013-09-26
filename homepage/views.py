@@ -72,6 +72,10 @@ def USTimeGraph(request):
 	messages = [USTimeGraphJson().populate(m['writtenDate'], m['num']) for m in messages]
 	return HttpResponse(serializers.serialize("json", messages, ensure_ascii=False))
 
+def MessagesJson(request):
+	messages = Message.objects.all()
+	return HttpResponse(serializers.serialize("json", messages, ensure_ascii=False))
+
 ################################
 # Redirect
 
