@@ -1,8 +1,11 @@
 var assignBuckets = function(states) {
+	var total = 0;
 	var dict = {};
 	for (var i = 0; i < states.length; i++) {
 		dict[states[i].pk] = states[i];
+		total += states[i].fields.num_cases;
 	}
+	dict['US'] = total;
 	return dict;
 }
 

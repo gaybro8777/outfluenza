@@ -19,7 +19,7 @@ $.fn.updateMap = function(error, us, states) {
 
 	var g;
 
-	var bucketDict = assignBuckets(states)
+	var bucketDict = assignBuckets(states);
 	
 	var svg = d3.select("#interactiveMap").append("svg")
 		.attr("width", width)
@@ -48,12 +48,19 @@ $.fn.updateMap = function(error, us, states) {
 
 
 	g.selectAll('path').each(function(d){
-        $(this).popover({trigger:'hover', title:d.properties.NAME10, placement:'top', content:"content", container:"body"});
+		var percentage = '0';
+		var state = bucketDict[d.properties.STUSPS10];
+		if (state) {
+			percentage = '' + (state.fields.num_cases * 100 / bucketDict['US']) ;
+		}
+		var content = percentage.substring(0,5) + '% of cases'
+        $(this).popover({trigger:'hover', title:d.properties.NAME10, placement:'top', content:content, container:"body"});
     });
 
 	var clicked = function(d, width, height) {
 		var x, y, k;
-
+		window.location.replace("/state/" + d.properties.STUSPS10);
+		return;
 		if (d && centered !== d) {
 		    var centroid = path.centroid(d);
 		    x = centroid[0];

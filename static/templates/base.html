@@ -12,6 +12,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/d3.v3.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/queue.v1.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/topojson.v1.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/base.js"></script>
   </head>
   <body>
     <div class="header">
@@ -23,13 +24,15 @@
     <nav class="navbar navbar-default" role="navigation" style="top:10px;">
         <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Enter ZIP">
+                <input id="zipcodeSearch" type="text" class="form-control" placeholder="Enter ZIP">
             </div>
-            <button type="submit" class="custom btn btn-default">GO</button>
+            <button type="button" class="custom btn btn-default" onClick="JavaScript:handleZipcodeClick()">GO</button>
+        </form>
+        <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Enter State">
+                <input id="stateSearch" type="text" class="form-control" placeholder="Enter State">
             </div>
-            <button type="submit" class="custom btn btn-default">GO</button>
+            <button type="button" class="custom btn btn-default" onClick="JavaScript:handleStateClick()">GO</button>
         </form>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav navbar-right">

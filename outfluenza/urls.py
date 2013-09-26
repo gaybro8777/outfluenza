@@ -27,16 +27,23 @@ urlpatterns = patterns('',
     url(r'^zipcodes/$', zipcodes.views.ListZipcodeView, name = 'zipcodes-list'),
 
     # Data Requests
-    url(r'^statesjson/$', homepage.views.StatesJson, name = 'statesjson'),
-    url(r'^ustimegraphjson/$', homepage.views.USTimeGraph, name = 'USTimeGraphJson'),
-    url(r'^statesstatisticjson/$', homepage.views.StatesStatisticJson, name = 'statesStatisticJson'),
-    url(r'^zipcodesjson/(?P<state>[A-Z]{2})$', homepage.views.ZipcodesJson, name = 'zipcodesjson'),
+    url(r'^statesjson/$', homepage.views.StatesJson),
+    url(r'^ustimegraphjson/$', homepage.views.USTimeGraph),
+    url(r'^statesstatisticjson/$', homepage.views.StatesStatisticJson),
+    url(r'^zipcodesjson/(?P<state>[A-Z]{2})$', homepage.views.ZipcodesJson),
+
+    # Search Requests
+    url(r'^findZipcode/(?P<zipcode>[0-9]+)$', homepage.views.ZipcodeSearch),
+    url(r'^findState/(?P<state>[A-Z|a-z]+)$', homepage.views.StateSearch),    
 
     # Homepage
     url(r'^$', homepage.views.HomepageView, name = 'homepage'),
     url(r'^state/(?P<state>[A-Z]{2})$', homepage.views.StateView, name = 'stateView'),
-    url(r'^team/$', homepage.views.TeamView, name = 'team'),
-    url(r'^instructions/$', homepage.views.InstructionsView, name = 'instructions'),
+    url(r'^team/$', homepage.views.TeamView),
+    url(r'^instructions/$', homepage.views.InstructionsView),
+
+    # Default
+    # url(r'[.]*', homepage.views.DefaultRedirect, name = 'homepage'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if not settings.DEBUG:
