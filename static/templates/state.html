@@ -3,5 +3,7 @@
 {% block content %}
     <div id="interactiveMap" data-root='{{state}}'></div>
     <div id="statistics"></div>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/homepageHelper.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/stateMap.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/state.js"></script>
 {% endblock %}

@@ -1,12 +1,12 @@
 (function($){
 $.fn.updateMap = function(error, us, states) {
 	var width = Math.max(1100,document.documentElement["clientWidth"]),
-	    height = 500,
+	    height = 700,
 	    margin = {top: 20, right: 20, bottom: 30, left: 130}, centered;
 
 	var projection = d3.geo.albersUsa()
 		.scale(1070)
-		.translate([width / 2 + margin.left, height / 2]);
+		.translate([width / 2 + margin.left, (height - 100)/ 2]);
 		
 	var rateById = d3.map();
 
@@ -53,14 +53,20 @@ $.fn.updateMap = function(error, us, states) {
 		if (state) {
 			percentage = '' + (state.fields.num_cases * 100 / bucketDict['US']) ;
 		}
-		var content = percentage.substring(0,5) + '% of cases'
-        $(this).popover({trigger:'hover', title:d.properties.NAME10, placement:'top', content:content, container:"body"});
+		var rateOfSpread = 
+			!bucketDict[d.properties.STUSPS10] ? 'Not Spreading'
+			: bucketDict[d.properties.STUSPS10].fields.bucket > 7 ? 'Rapid'
+			: bucketDict[d.properties.STUSPS10].fields.bucket > 2 ? 'Slow'
+			: 'Not Spreading';
+		var content = '<strong>Percentage of reported case:</strong> ' + percentage.substring(0,5) + '%<br />';
+		content += '<b>Rate of Spread: </b> ' + rateOfSpread;
+        $(this).popover({trigger:'hover', html:"true", title:d.properties.NAME10, placement:'top', content:content, container:"body"});
     });
 
 	var clicked = function(d, width, height) {
 		var x, y, k;
-		window.location.replace("/state/" + d.properties.STUSPS10);
-		return;
+		//window.location.replace("/state/" + d.properties.STUSPS10);
+		
 		if (d && centered !== d) {
 		    var centroid = path.centroid(d);
 		    x = centroid[0];
