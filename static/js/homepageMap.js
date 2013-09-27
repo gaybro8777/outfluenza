@@ -18,6 +18,7 @@ $.fn.updateMap = function(error, us, states) {
 		.projection(projection);
 
 	var g;
+	var zipcodeNodes;
 
 	var bucketDict = assignBuckets(states);
 	
@@ -32,7 +33,8 @@ $.fn.updateMap = function(error, us, states) {
 		.attr("height", height)
 		.on("click", clicked);
 
-	g = svg.append("g")
+	g = svg.append("g");
+	zipcodeNodes = svg.append("g");
 
 	g.append("g")
 	    .attr("class", "states")
