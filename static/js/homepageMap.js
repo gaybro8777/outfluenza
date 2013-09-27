@@ -63,6 +63,24 @@ $.fn.updateMap = function(error, us, states) {
         $(this).popover({trigger:'hover', html:"true", title:d.properties.NAME10, placement:'top', content:content, container:"body"});
     });
 
+    var handleZipcodes = function(centered, x, y, k) {
+		if (centered) {
+		  	d3.json("/static/data/" + centered.properties.STUSPS10 + ".json", function(state) {
+		  		zipcodeNodes.selectAll('g')
+			  		.data(topojson.feature(state, state.objects[firstKey(state.objects)]).features)
+		    		.enter()
+		    		.append("path")
+		    		.attr("class", function(d) {
+		    			var bucket = bucketDict[d.properties.ZCTA5CE10];
+		      			return "q" + (bucket ? bucket.fields.bucket : 2) + "-9"; 
+		      		})
+		    		.attr("d", path)
+		    		.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+				  	.on("click", function(d) { return clicked(d, width, height); });
+		  	});
+		}
+	};
+
 	var clicked = function(d, width, height) {
 		var x, y, k;
 		//window.location.replace("/state/" + d.properties.STUSPS10);
@@ -87,6 +105,7 @@ $.fn.updateMap = function(error, us, states) {
 		      .duration(750)
 		      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
 		      .style("stroke-width", 1.5 / k + "px");
+		handleZipcodes(centered, x, y, k);	
 	}
 
 }
