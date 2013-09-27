@@ -1,11 +1,24 @@
+.topStatsHeader{
+  color: #777;
+  font-size: 18px;
+  font-family: helvetica;
+  font-weight: bold;
+}
+.topStatsTableHeader{
+  color: #777;
+  font-size: 16px;
+  font-family: helvetica;
+}
+
 .topStats {
     position: absolute;
     width: 300px;
-    height: 480px;
+    height: 580px;
     top: 185px;
     left: 20px;
     background-color: #f6f6f6;
     padding: 10px;
+    text-align: center;
 }
 
 .box {

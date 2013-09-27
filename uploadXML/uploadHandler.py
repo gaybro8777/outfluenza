@@ -1,5 +1,6 @@
 from message.models import Message
 from zipcodeHandler import handleZipcode, getStateForZipcode
+from ageHandler import handleAge
 import xml.etree.cElementTree as etree
 from xml.etree.cElementTree import ParseError as ParseError
 import datetime
@@ -14,7 +15,8 @@ def handleUpload(file):
 			xmlObj = etree.fromstring(line)
 			message = createMessage(xmlObj)
 			message.save()
-			handleZipcode(message)
+			zipcode = handleZipcode(message)
+			handleAge(message, zipcode)
 		except ParseError as inst:
 			print(i)
 			pass
@@ -53,8 +55,6 @@ def stringToDatetime(timeString, timeFormat):
 	return datetime.datetime.fromtimestamp(time.mktime(time.strptime(timeString, timeFormat)))
 
 def handlePrescriber(message, prescriber):
-	for lastName in prescriber.iter(TAG_PREFIX + 'LastName'):
-		message.prescriberLastName = lastName.text
 	for zipcode in prescriber.iter(TAG_PREFIX + 'ZipCode'):
 		message.prescriberZipcode = int(zipcode.text)
 
@@ -71,10 +71,6 @@ def handleMedication(message, medication):
 		message.productCode = productCode.text
 	for date in medication.iter(TAG_PREFIX + 'WrittenDate'):
 		message.writtenDate = stringToDatetime(date.text, "%Y%m%d")
-		#message.writtenDate = message.writtenDate.replace(day = 1)
-	for refills in medication.iter(TAG_PREFIX + 'Refills'):
-		for quantity in refills.iter(TAG_PREFIX + 'Quantity'):
-			message.refillsQuantity = int(quantity.text)
 
 def handlePharmacy(message, pharmacy):
 	for zipcode in pharmacy.iter(TAG_PREFIX + 'ZipCode'):

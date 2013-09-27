@@ -2,13 +2,21 @@
 {% block content %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/homepage.css">
     <div class="topStats">
-    	<h3>Top Statistics</h3>
-    	<div id="topStatisticsTable"></div>
+        <div class="container">
+           <div class="topStatsHeader">Top Current Statistics</div> <br />
+    	   <div class="topStatsTableHeader">States with the highest # of cases</div>
+    	   <div id="topStatesTable"></div>
+           <div class="topStatsTableHeader">Zipcodes with the most patients</div>
+           <div id="topZipcodesTable"></div>
+           <div id="topCountiesTable"></div>
+           <div id="topDrugsTable">Top Drug Prescrbed: {{topDrug}}.</div>
+        </div>
     </div>
     <div id="interactiveMap"></div>
     <div id="statistics"></div>
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepageHelper.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepageMap.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepageStatistics.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/homepageTopStatistics.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepage.js"></script>
 {% endblock %}

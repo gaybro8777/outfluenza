@@ -9,14 +9,14 @@ import json
 from django.core import serializers
 from django.db.models import Count
 from outfluenza.settings import STATIC_URL
-from homepage.homepageHandler import orderZipcodesIntoSortedStates, orderZipcodesFromState, orderMessagesIntoSortedStates
+from homepage.homepageHandler import orderZipcodesIntoSortedStates, orderZipcodesFromState, orderMessagesIntoSortedStates, getTopZipcodes, getTopDrug
 
 ################################
 # Views
 
 def HomepageView(request):
     template = loader.get_template('homepage.html')
-    context = RequestContext(request)
+    context = RequestContext(request, {'topDrug': getTopDrug()})
     return HttpResponse(template.render(context))
 
 def StateView(request, state):
@@ -71,6 +71,10 @@ def USTimeGraph(request):
 	messages = Message.objects.values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
 	messages = [USTimeGraphJson().populate(m['writtenDate'], m['num']) for m in messages]
 	return HttpResponse(serializers.serialize("json", messages, ensure_ascii=False))
+
+def TopZipcodesJson(request):
+	zipcodes = getTopZipcodes()
+	return HttpResponse(serializers.serialize("json", zipcodes, ensure_ascii=False))
 
 ################################
 # Redirect

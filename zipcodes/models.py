@@ -2,23 +2,23 @@ from django.db import models
 
 class Zipcode(models.Model):
 	zipcode = models.IntegerField(primary_key = True)
-	prescriberCases = models.IntegerField()
-	patientCases = models.IntegerField()
-	pharmacyCases = models.IntegerField()
+	county = models.CharField(max_length=20)
+	malePatientCases = models.IntegerField()
+	femalePatientCases = models.IntegerField()
 	state = models.CharField(max_length=2)
 
 	def __str__(self):
 		output = 'Zipcode: ' + str(self.zipcode)
 		output += ', State: ' + self.state
-		output += ', Prescriber Cases: ' + str(self.prescriberCases)
-		output += ', Patient Zipcode: ' + str(self.patientCases)
-		output += ', Pharmacy Zipcode: ' + str(self.pharmacyCases)
+		output += ', County: ' + str(self.county)
+		output += ', Male Patient Cases: ' + str(self.malePatientCases)
+		output += ', Female Patient Cases: ' + str(self.femalePatientCases)
 		return output
 
-	def defaultFields(self, zipcode, state):
+	def defaultFields(self, zipcode, state, county):
 		self.zipcode = zipcode
-		self.prescriberCases = 0
-		self.patientCases = 0
-		self.pharmacyCases = 0
+		self.county = county
+		self.malePatientCases = 0
+		self.femalePatientCases = 0
 		self.state = state
 		return self

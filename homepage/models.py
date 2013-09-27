@@ -32,3 +32,5 @@ class USTimeGraphJson(models.Model):
 		self.date = date
 		self.num = num
 		return self
+
+

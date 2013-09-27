@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     'zipcodes',
     'homepage',
+    'age',
     'south'
 )
 

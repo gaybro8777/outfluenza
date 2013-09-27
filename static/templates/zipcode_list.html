@@ -10,9 +10,9 @@
     <tr class="column_titles">
       <th>Zipcode</th>
       <th>State</th>
-    	<th>Prescriber Cases</th>
-      <th>Patient Cases</th>
-    	<th>Pharmacy Cases</th>
+    	<th>County</th>
+      <th>Male Patient Cases</th>
+    	<th>Female Patient Cases</th>
     </tr>
   </thead>
   <tbody>
@@ -20,9 +20,9 @@
       <tr>
         <td>{{ zipcode.zipcode }}</td>
         <td>{{ zipcode.state }}</td>
-      	<td>{{ zipcode.prescriberCases }}</td>
-      	<td>{{ zipcode.patientCases }}</td>
-        <td>{{ zipcode.pharmacyCases }}</td>
+      	<td>{{ zipcode.county }}</td>
+      	<td>{{ zipcode.malePatientCases }}</td>
+        <td>{{ zipcode.femalePatientCases }}</td>
       </tr>
     {% endfor %}
   </tbody>

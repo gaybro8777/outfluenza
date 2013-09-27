@@ -1,6 +1,8 @@
 from django.db import models
 import datetime
 
+DEFAULT_TIME = datetime.date(1000, 1, 1)
+
 class Message(models.Model):
 	# message ID
 	messageID = models.CharField(max_length = 200, primary_key = True)
@@ -8,14 +10,10 @@ class Message(models.Model):
 	# medication fields
 	writtenDate = models.DateField()
 	productCode = models.CharField(max_length = 200)
-	refillsQuantity = models.IntegerField()
 		
 	# patient fields
 	patientGender = models.CharField(max_length = 1)
 	patientDob = models.DateField()
-
-	# prescriber fields
-	prescriberLastName = models.CharField(max_length = 75)
 
 	#Geographic Information
 	zipcode = models.IntegerField()
@@ -25,23 +23,18 @@ class Message(models.Model):
 		output = 'messageID: ' + self.messageID + '\n'
 		output += 'writtenDate: ' + str(self.writtenDate) + '\n'
 		output += 'productCode: ' + self.productCode + '\n'
-		output += 'refillsQuantity: ' + str(self.refillsQuantity) + '\n'
 		output += 'patientGender: ' + self.patientGender + '\n'
 		output += 'patientDob: ' + str(self.patientDob) + '\n'
-		output += 'prescriberLastName: ' + str(self.prescriberLastName) + '\n'
+		output += 'zipcode: ' + str(self.zipcode) + '\n'
+		output += 'state: ' + self.state + '\n'
 		return output
 
 	def defaultFields(self):
 		self.messageID = ""
-		self.writtenDate = datetime.date(1000, 1, 1)
+		self.writtenDate = DEFAULT_TIME
 		self.productCode = ""
-		self.refillsQuantity = 0
-		self.patientZipcode = 0
 		self.patientGender = "M"
-		self.patientDob = datetime.date(1000, 1, 1)
-		self.prescriberLastName = ""
-		self.prescriberZipcode = 0
-		self.pharmacyZipcode = 0
+		self.patientDob = DEFAULT_TIME
 		self.zipcode = 0
 		self.state = 'AA'
 		return self
