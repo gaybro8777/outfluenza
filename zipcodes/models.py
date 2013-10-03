@@ -2,7 +2,7 @@ from django.db import models
 
 class Zipcode(models.Model):
 	zipcode = models.IntegerField(primary_key = True)
-	county = models.CharField(max_length=20)
+	county = models.CharField(max_length=100)
 	malePatientCases = models.IntegerField()
 	femalePatientCases = models.IntegerField()
 	state = models.CharField(max_length=2)

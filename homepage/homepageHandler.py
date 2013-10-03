@@ -1,7 +1,8 @@
 from zipcodes.models import Zipcode
 from message.models import Message
+from age.models import Age
+from homepage.models import State, County, Gender, DisplayAge, USTimeGraphJson
 from django.db.models import Sum, Count
-from homepage.models import State
 
 TOTAL_BUCKETS = 10
 
@@ -10,25 +11,31 @@ def assignBuckets(states):
 	per_bucket = 1.0
 	if (num_states > TOTAL_BUCKETS):
 		per_bucket = float(num_states) / float(TOTAL_BUCKETS)
-	curr_bucket = TOTAL_BUCKETS-1
+	curr_bucket = 0
 	counter = 0
 	for s in states:
 		s['bucket'] = curr_bucket
 		counter += 1
 		if counter >= per_bucket:
 			counter = 0
-			curr_bucket -= 1
+			curr_bucket += 1
 
 def orderZipcodesIntoSortedStates():
 	states = Zipcode.objects.values('state') \
-		.annotate(num_male_cases=Sum('malePatientCases'), num_female_cases=Sum('femalePatientCases')) \
-		.order_by('-num_male_cases')
+		.annotate(num_male_cases=Sum('malePatientCases'), num_female_cases=Sum('femalePatientCases'))
+	states = sorted(states, key=lambda state: state['num_male_cases'] + state['num_female_cases'])
 	assignBuckets(states)
-	states = [State().populate(s['state'], s['num_male_cases'], s['bucket']) for s in states]
+	states = [State().populate(s['state'], s['num_male_cases'], s['num_female_cases'], s['bucket']) for s in states]
 	return states
 
-def orderZipcodesFromState(state):
-	return Zipcode.objects.filter(state__exact = state)
+def orderCountiesFromState(state):
+	counties = Zipcode.objects.filter(state__exact = state) \
+		.values('county') \
+		.annotate(num_male_cases=Sum('malePatientCases'), num_female_cases=Sum('femalePatientCases'))
+	counties = sorted(counties, key=lambda county: county['num_male_cases'] + county['num_female_cases'])
+	assignBuckets(counties)
+	counties = [County().populate(c['county'], c['num_male_cases'], c['num_female_cases'], c['bucket']) for c in counties]
+	return counties
 
 def orderMessagesIntoSortedStates():
 	messages = Message.objects.values('state')
@@ -40,3 +47,21 @@ def getTopZipcodes():
 def getTopDrug():
 	product = Message.objects.values('productCode').annotate(num=Count('productCode')).order_by('-num')[0:5]
 	return product[0]['productCode']
+
+def orderGenderFromState(state):
+	zipcodes = Zipcode.objects.filter(state__exact = state)
+	gender = Gender().populate(state)
+	for zipcode in zipcodes:
+		gender.male += zipcode.malePatientCases
+		gender.female += zipcode.femalePatientCases
+	return gender
+
+def orderAgeFromState(state):
+	ages = Age.objects.filter(state__exact=state).values('age').annotate(num_cases=Sum('num_cases'))
+	ages = [DisplayAge().populate(a['age'], a['num_cases']) for a in ages]
+	return ages
+
+def orderMessagesIntoState(state):
+	messages = Message.objects.filter(state__exact=state).values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
+	messages = [USTimeGraphJson().populate(m['writtenDate'], m['num']) for m in messages]
+	return messages

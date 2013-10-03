@@ -33,7 +33,7 @@
   fill: none;
 }
 
-.counties .active {
+.counties.active {
 	fill: orange;
 	stroke: white;
 	stroke-width: 0.5;

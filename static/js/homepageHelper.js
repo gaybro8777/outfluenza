@@ -9,10 +9,14 @@ var assignBuckets = function(states) {
 	return dict;
 }
 
-var assignBucketsToZipcodes = function(zipcodes) {
+var assignBucketsToCounties = function(counties) {
 	var dict = {}
-	for (var i = 0; i < zipcodes.length; i++) {
-		dict[zipcodes[i].pk] = zipcodes[i];
+	for (var i = 0; i < counties.length; i++) {
+		dict[counties[i].pk] = counties[i];
 	}
 	return dict;
+}
+
+var firstKey = function(obj) {
+    for (var a in obj) return a;
 }

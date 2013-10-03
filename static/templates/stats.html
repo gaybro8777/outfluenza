@@ -1,0 +1,104 @@
+
+<link rel="stylesheet" href="{{STATIC_URL}}css/statsStyle.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/d3LineChart.css">
+<link href="{{STATIC_URL}}css/tipsy.css" rel="stylesheet" type="text/css" />
+  <div class="border">
+	<div class="statsheader">
+        <div class="statsmaintitle">{{state}}</div>
+    </div>
+  </div>
+  <br>
+  <div class="section">
+      <div class="statssubtitle">General Statistics</div><br />
+      <div id="statBubbles">
+      	<div class="textCircle"><img width="50px" src="{{STATIC_URL}}img/googleMaps.jpg"><br /><br />the nearest outbreak is <span class="emphasis">5.3 mi</span> away in 07751.</div>
+      	<div class="textCircle"><br><img width="70px" src="{{STATIC_URL}}img/disease.jpg"><br><br>over the last month, there has been a daily average of <span class="emphasis">5 new cases</span> per capita.</div>
+      	<div class="textCircle"><br><img width="70px" src="{{STATIC_URL}}img/calendar.png"><br>the number of influenza cases detected increased <span class="emphasis">3.2%</span> from this time last year.</div>
+      </div>
+  </div>
+  <div class="section">
+    <div class="subtitle">Demographic Breakdown</div><br>
+    <div class="left">
+    <div class="graphtitle">Distribution of infected ages</div>
+    <div id="ageDistribution">
+    	<label><input type="checkbox"> Sort values</label>
+    </div>
+    </div>
+    <div class="right">
+    <div class="graphtitle">Gender split of infected</div>
+    <div id="genderSplit"></div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <br />
+  <div class="section">
+	  <div class="subtitle">Drugs Prescribed</div><br>
+	  <div class="graphtitle">Most frequently prescribed drugs over past month</div>
+	  <div class="centered">
+	  <table id="rounded-corner">
+		<thead>
+		<tr>
+		<th scope="col" class="rounded-rank"></th>
+		<th scope="col" class="rounded-company">Drug</th>
+		<th scope="col" class="rounded-q1 drugData">Average Dosage</th>
+		<th scope="col" class="rounded-q2 drugData">Prescriptions in NJ</th>
+		<th scope="col" class="rounded-q3 drugData">Average prescriptions (across all states)</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td class="drugRank">1.</td>
+		<td><b>Tamiflu</b></td>
+		<td class="drugData">3</td>
+		<td class="drugData">423</td>
+		<td class="drugData">335</td>
+		</tr>
+		<tr>
+		<td class="drugRank">2.</td>
+		<td><b>Relenza</b></td>
+		<td class="drugData">3</td>
+		<td class="drugData">406</td>
+		<td class="drugData">452</td>
+		</tr>
+		<tr>
+		<td class="drugRank">3.</td>
+		<td><b>Symmetrel</b></td>
+		<td class="drugData">3</td>
+		<td class="drugData">302</td>
+		<td class="drugData">333</td>
+		</tr>
+		<tr>
+		<td class="drugRank">4.</td>
+		<td><b>Flumadine</b></td>
+		<td class="drugData">1</td>
+		<td class="drugData">156</td>
+		<td class="drugData">223</td>
+		</tr>
+		<tr>
+		<td class="drugRank">5.</td>
+		<td><b>Zanamivir</b></td>
+		<td class="drugData">3</td>
+		<td class="drugData">154</td>
+		<td class="drugData">223</td>
+		</tr>
+		</tbody>
+	</table>
+	</div>
+  </div>
+  <div class="section">
+  	<div class="subtitle">Time Lapse</div><br>
+  	<div class="graphtitle">Change in number of influenza prescriptions over time</div>
+  	<div id="flip-tabs" >  
+	    <ul id="flip-navigation" >  
+	        <li><a href="#" id="tab-0"  >Week</a></li>  
+	        <li class="selected"><a href="#" id="tab-1" >Month</a></li>  
+	        <li><a href="#" id="tab-2" >Year</a></li>  
+	    </ul>   
+	</div>  
+    <div id="chart"></div>
+  </div>
+  <script src="{{STATIC_URL}}js/jquery.tipsy.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/d3LineChart.js" type="text/javascript"></script>
+  <script src="{{STATIC_URL}}js/genderAndAge.js" type="text/javascript"></script>

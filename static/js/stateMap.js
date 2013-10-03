@@ -1,12 +1,12 @@
 (function($){
-$.fn.updateMap = function(error, state, zipcodes) {
+$.fn.updateMap = function(error, state, counties) {
 	
 	var firstKey = function(obj) {
     for (var a in obj) return a;
 	}
 
 	var width = Math.max(1100,document.documentElement["clientWidth"]),
-	    height = 500,
+	    height = 780,
 	    margin = {top: 20, right: 20, bottom: 30, left: 130}, centered;
 
 	var projection = d3.geo.albersUsa()
@@ -24,7 +24,7 @@ $.fn.updateMap = function(error, state, zipcodes) {
 
 	var g;
 
-	var bucketDict = assignBucketsToZipcodes(zipcodes)
+	var bucketDict = assignBucketsToCounties(counties)
 
 	var svg = d3.select("#interactiveMap").append("svg")
 		.attr("width", width)
@@ -35,7 +35,6 @@ $.fn.updateMap = function(error, state, zipcodes) {
 		.attr("class", "background")
 		.attr("width", width)
 		.attr("height", height)
-		.on("click", clicked);
 
 	g = svg.append("g")
 
@@ -45,40 +44,22 @@ $.fn.updateMap = function(error, state, zipcodes) {
 	    .data(topojson.feature(state, state.objects[firstKey(state.objects)]).features)
 	    .enter().append("path")
 	    .attr("class", function(d) {
-	    	var bucket = bucketDict[d.properties.ZCTA5CE10];
-	      	return "q" + (bucket ? bucket.fields.bucket : 2) + "-9"; 
+	    	var bucket = bucketDict[d.properties.NAME10.toUpperCase()];
+	      	return "q" + (bucket ? bucket.fields.bucket : 0) + "-9"; 
 	      })
-	    .attr("d", path)
-	  	.on("click", function(d) { return clicked(d, width, height); });
+	    .attr("d", path);
 
 	g.selectAll('path').each(function(d){
-        $(this).popover({trigger:'hover', title:d.properties.ZCTA5CE10, placement:'top', content:"content", container:"body"});
+        $(this).popover({trigger:'hover', title:d.properties.NAME10, placement:'top', content:"content", container:"body"});
     });
 
-	var clicked = function(d, width, height) {
-		var x, y, k;
-
-		if (d && centered !== d) {
-		    var centroid = path.centroid(d);
-		    x = centroid[0];
-		    y = centroid[1];
-		    k = 3;
-		    centered = d;
-		  } else {
-		    x = width / 2;
-		    y = height / 2;
-		    k = 1;
-		    centered = null;
-		  }
-
-		  g.selectAll("path")
-		      .classed("active", centered && function(d) { return d === centered; });
-
-		  g.transition()
+	var centroid = path.centroid(topojson.feature(state, state.objects[firstKey(state.objects)]));
+	var x = centroid[0];
+	var y = centroid[1];
+	var k = 3;
+    g.transition()
 		      .duration(750)
-		      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-		      .style("stroke-width", 1.5 / k + "px");
-	}
+		      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")");
 
 }
 })(jQuery);

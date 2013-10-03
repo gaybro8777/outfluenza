@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+	<link rel="stylesheet" href="{{STATIC_URL}}css/homepage.css">
     <div id="interactiveMap" data-root='{{state}}'></div>
-    <div id="statistics"></div>
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepageHelper.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/stateMap.js"></script>
+    {% include './stats.html' %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/state.js"></script>
+
+
 {% endblock %}

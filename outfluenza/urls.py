@@ -29,13 +29,17 @@ urlpatterns = patterns('',
     # Data Requests
     url(r'^statesjson/$', homepage.views.StatesJson),
     url(r'^ustimegraphjson/$', homepage.views.USTimeGraph),
+    url(r'^statetimegraphjson/(?P<state>[A-Z]{2})$', homepage.views.StateTimeGraph),
     url(r'^statesstatisticjson/$', homepage.views.StatesStatisticJson),
-    url(r'^zipcodesjson/(?P<state>[A-Z]{2})$', homepage.views.ZipcodesJson),
+    url(r'^countyjson/(?P<state>[A-Z]{2})$', homepage.views.CountyJson),
     url(r'^topzipcodesjson/$', homepage.views.TopZipcodesJson),
+    url(r'^genderjson/(?P<state>[A-Z]{2})$', homepage.views.GenderJson),
+    url(r'^agejson/(?P<state>[A-Z]{2})$', homepage.views.AgeJson),
 
     # Search Requests
-    url(r'^findZipcode/(?P<zipcode>[0-9]+)$', homepage.views.ZipcodeSearch),
-    url(r'^findState/(?P<state>[A-Z|a-z]+)$', homepage.views.StateSearch),    
+    url(r'^find/(?P<zipcode>[0-9]+)$', homepage.views.ZipcodeSearch),
+    url(r'^find/(?P<state>[A-Z|a-z|\w|\W]+)$', homepage.views.StateSearch),    
+    url(r'^find/(?P<query>.+)$', homepage.views.Search),
 
     # Homepage
     url(r'^$', homepage.views.HomepageView, name = 'homepage'),
