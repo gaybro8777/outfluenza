@@ -85,8 +85,9 @@ $.fn.updateMap = function(error, us, states) {
 
 	var clicked = function(d, width, height) {
 		var x, y, k;
-		//window.location.replace("/state/" + d.properties.STUSPS10);
-		
+		console.log('hhere')
+		window.location.replace("/state/" + d.properties.STUSPS10);
+		return;
 		if (d && centered !== d) {
 		    var centroid = path.centroid(d);
 		    x = centroid[0];

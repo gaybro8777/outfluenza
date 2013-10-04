@@ -38,7 +38,7 @@
 
 		rows.selectAll('td')
 			.data(function(row) {
-				return [row.pk, row.fields.num_cases]
+				return [row.pk, row.fields.num_female_cases + row.fields.num_male_cases]
 			})
 			.enter()
 			.append('td')
@@ -83,7 +83,7 @@
 
 		rows_states.selectAll('td')
 			.data(function(row) {
-				return [row.pk, row.fields.state, row.fields.patientCases]
+				return [row.pk, row.fields.state, row.fields.malePatientCases + row.fields.femalePatientCases]
 			})
 			.enter()
 			.append('td')

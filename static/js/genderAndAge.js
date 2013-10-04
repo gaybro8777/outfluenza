@@ -19,7 +19,7 @@ updateGenderAndAge = function(error, gender, ageInfo) {
 	var yAxis = d3.svg.axis()
 	    .scale(y)
 	    .orient("left")
-	    .tickFormat(formatPercent);
+	    .tickFormat(function(d) { return d; });
 	 
 	var svg = d3.select("#ageDistribution").append("svg")
 	    .attr("width", width + margin.left + margin.right)
@@ -28,8 +28,10 @@ updateGenderAndAge = function(error, gender, ageInfo) {
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 	 
 	var displayAge = function(error, data) {
+		var total = 0;
 	  data.forEach(function(d) {
 	    d.frequency = d.frequency ? d.frequency : 0;
+	    total += d.frequency;
 	  });
 	 
 	  x.domain(data.map(function(d) { return d.age; }));

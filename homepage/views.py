@@ -13,7 +13,8 @@ from django.db.models import Count
 from outfluenza.settings import STATIC_URL
 from homepage.homepageHandler import orderZipcodesIntoSortedStates, \
 	orderCountiesFromState, orderMessagesIntoSortedStates, getTopZipcodes, \
-	getTopDrug, orderGenderFromState, orderAgeFromState, orderMessagesIntoState
+	getTopDrug, orderGenderFromState, orderAgeFromState, orderMessagesIntoState, \
+	getTopMetrics
 
 ################################
 # Views
@@ -96,6 +97,9 @@ def StateTimeGraph(request, state):
 	messages = orderMessagesIntoState(state)
 	return HttpResponse(serializers.serialize("json", messages, ensure_ascii=False))
 
+def TopMetrics(request, state):
+	data = getTopMetrics(state)
+	return HttpResponse(serializers.serialize("json", data, ensure_ascii=False))	
 
 ################################
 # Redirect

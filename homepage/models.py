@@ -78,3 +78,12 @@ class DisplayAge(models.Model):
 		self.num_cases = num_cases
 		return self
 		
+class TopMetrics(models.Model):
+	worstZipcode = models.IntegerField()
+	numRecentCases = models.IntegerField()
+	percentIncrease = models.IntegerField()
+
+	def populate(self, worstZipcode, numRecentCases, percentIncrease):
+		self.worstZipcode = worstZipcode
+		self.numRecentCases = numRecentCases
+		self.percentIncrease = percentIncrease

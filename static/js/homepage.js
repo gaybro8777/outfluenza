@@ -16,5 +16,5 @@ function ready(error, us, states, stateStatistics, topZipcodes) {
 	
 	var $usmap = $('#interactiveMap');
     $usmap.updateMap(error, us, states);
-	updateStatistics(error, stateStatistics);
+	//updateStatistics(error, stateStatistics);
 }

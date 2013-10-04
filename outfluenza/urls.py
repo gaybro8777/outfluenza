@@ -4,6 +4,7 @@ import uploadXML.views
 import zipcodes.views
 import homepage.views
 import settings
+import predictions.views
 from django.conf.urls.static import static
 
 # Uncomment the next two lines to enable the admin:
@@ -35,6 +36,7 @@ urlpatterns = patterns('',
     url(r'^topzipcodesjson/$', homepage.views.TopZipcodesJson),
     url(r'^genderjson/(?P<state>[A-Z]{2})$', homepage.views.GenderJson),
     url(r'^agejson/(?P<state>[A-Z]{2})$', homepage.views.AgeJson),
+    url(r'^topmetrics/(?P<state>[A-Z]{2})$', homepage.views.TopMetrics),
 
     # Search Requests
     url(r'^find/(?P<zipcode>[0-9]+)$', homepage.views.ZipcodeSearch),
@@ -46,6 +48,9 @@ urlpatterns = patterns('',
     url(r'^state/(?P<state>[A-Z]{2})$', homepage.views.StateView, name = 'stateView'),
     url(r'^team/$', homepage.views.TeamView),
     url(r'^instructions/$', homepage.views.InstructionsView),
+
+    # Predictions
+    url(r'^createpredictions/$', predictions.views.CreatePredictions),    
 
     # Default
     # url(r'[.]*', homepage.views.DefaultRedirect, name = 'homepage'),

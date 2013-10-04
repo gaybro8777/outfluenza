@@ -12,9 +12,9 @@
   <div class="section">
       <div class="statssubtitle">General Statistics</div><br />
       <div id="statBubbles">
-      	<div class="textCircle"><img width="50px" src="{{STATIC_URL}}img/googleMaps.jpg"><br /><br />the nearest outbreak is <span class="emphasis">5.3 mi</span> away in 07751.</div>
-      	<div class="textCircle"><br><img width="70px" src="{{STATIC_URL}}img/disease.jpg"><br><br>over the last month, there has been a daily average of <span class="emphasis">5 new cases</span> per capita.</div>
-      	<div class="textCircle"><br><img width="70px" src="{{STATIC_URL}}img/calendar.png"><br>the number of influenza cases detected increased <span class="emphasis">3.2%</span> from this time last year.</div>
+      	<div class="textCircle"><img width="50px" src="{{STATIC_URL}}img/googleMaps.jpg"><br /><br />the nearest outbreak is <span class="emphasis"><div id='worstZipcode'></div></span></div>
+      	<div class="textCircle"><br><img width="70px" src="{{STATIC_URL}}img/disease.jpg"><br><br>over the last month, there has been a daily average of <span class="emphasis"><div id='numRecentCases'></div></span></div>
+      	<div class="textCircle"><br><img width="70px" src="{{STATIC_URL}}img/calendar.png"><br>The rate of increase of influenza cases  from this time last month is: <span class="emphasis"><div id='percentIncrease'></div></span></div>
       </div>
   </div>
   <div class="section">
