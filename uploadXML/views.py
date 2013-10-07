@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.views.generic import CreateView
 
+from django.conf import settings
 from uploadXML.models import UploadFileForm
 from uploadXML.uploadHandler import handleUpload
 
@@ -16,3 +17,8 @@ def UploadFileView(request):
 			'form' : UploadFileForm(),
 		})
 	return HttpResponse(template.render(context))
+
+def UploadLargeData(request):
+	f = open('static/' + 'data/largeData.txt', 'r')
+	handleUpload(f)
+	return HttpResponseRedirect('/zipcodes')

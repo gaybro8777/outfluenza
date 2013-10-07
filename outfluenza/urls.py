@@ -53,6 +53,9 @@ urlpatterns = patterns('',
     # Predictions
     url(r'^createpredictions/$', predictions.views.CreatePredictions),    
 
+    # Upload
+    url(r'^uploadlargedata/$', uploadXML.views.UploadLargeData)
+
     # Default
     # url(r'[.]*', homepage.views.DefaultRedirect, name = 'homepage'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
