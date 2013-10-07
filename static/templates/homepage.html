@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/statsStyle.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/d3LineChart.css" />
     <div id="header">
-      <form action="JavaScript:handleZipcodeClick()" class="search" id="zipSearch">
-      <input class="search-box" onClick="JavaScript:handleZipcodeClick()" placeholder="Enter ZIP or State" type="text" id="zipSearchBox">
+      <form class="search" id="zipSearch">
+      <input class="search-box" placeholder="Enter ZIP or State" type="text" id="zipSearchBox">
       <i class="icon-search"></i>
       </form>
     </div>
@@ -32,42 +32,6 @@
         <div id="accordion2">
           <h3>Most infected states</h3>
           <div>
-            <!--table class="table-corner">
-              <thead>
-              <tr>
-              <th scope="col" class="table-rank stateHeader"></th>
-              <th scope="col" class="table-company stateHeader">State</th>
-              <th scope="col" class="table-q1 tableData stateHeader">Number of influenza cases</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-              <td class="tableRank stateBody">1.</td>
-              <td class="stateBody"><b>California</b></td>
-              <td class="tableData stateBody">3</td>
-              </tr>
-              <tr>
-              <td class="tableRank stateBody">2.</td>
-              <td class="stateBody"><b>New York</b></td>
-              <td class="tableData stateBody">3</td>
-              </tr>
-              <tr>
-              <td class="tableRank stateBody">3.</td>
-              <td class="stateBody"><b>Arizona</b></td>
-              <td class="tableData stateBody">3</td>
-              </tr>
-              <tr>
-              <td class="tableRank stateBody">4.</td>
-              <td class="stateBody"><b>New Jersey</b></td>
-              <td class="tableData stateBody">1</td>
-              </tr>
-              <tr>
-              <td class="tableRank stateBody">5.</td>
-              <td class="stateBody"><b>Montana</b></td>
-              <td class="tableData stateBody">3</td>
-              </tr>
-              </tbody>
-              </table-->
               <div id="topStatesTable"></div>
           </div>
           <h3>Most infected zip codes</h3>
@@ -202,26 +166,26 @@
             <div id="timeChartContainer">
               <div id="flip-tabs">  
                 <ul id="flip-navigation" >  
-                  <li><a href="#" id="tab-0"  >Week</a></li>  
+                  <li><a href="#" id="tab-0">Week</a></li>  
                   <li class="selected"><a href="#" id="tab-1" >Month</a></li>  
                   <li><a href="#" id="tab-2" >Year</a></li>  
                 </ul>   
               </div>  
               <div id="chart"></div>
-              <a href="http://www.google.com" id="downloadLink">Download CSV file  >></a>
+              <a id="downloadLink">Download CSV file  >></a>
             </div>
           </div>
           <h3>Gender breakdown</h3>
             <div>
               <div id="genderSplit"></div>
-              <a href="http://www.google.com" id="downloadLink">Download CSV file  >></a>
+              <a id="downloadLink">Download CSV file  >></a>
             </div>
           <h3>Age distribution</h3>
           <div>
             <div id="ageDistribution">
               <label><input type="checkbox" id="checkbox"><span id="labelTitle">Sort values</span></label>
             </div>
-            <a href="http://www.google.com" id="downloadLink">Download CSV file  >></a>
+            <a id="downloadLink">Download CSV file  >></a>
           </div>
         </div>
       </div>
@@ -230,22 +194,6 @@
     <div id="colorKey">
       <img src="{{ STATIC_URL }}img/colorKey.png">
     </div>
-
-
-
-    <!--div class="topStats">
-        <div class="container">
-           <div class="topStatsHeader">Top Current Statistics</div> <br />
-         <div class="topStatsTableHeader">table with the highest # of cases</div>
-         <div id="toptableTable"></div>
-           <div class="topStatsTableHeader">Zipcodes with the most patients</div>
-           <div id="topZipcodesTable"></div>
-           <div id="topCountiesTable"></div>
-           <div id="topDrugsTable">Top Drug Prescrbed: {{topDrug}}.</div>
-        </div>
-    </div>
-    <div id="interactiveMap"></div>
-    <div id="statistics"></div-->
     
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepageHelper.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/genderAndAge.js"></script>
@@ -256,4 +204,19 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepageTopStatistics.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepage.js"></script>
     <script src="{{ STATIC_URL }}js/jquery-ui.js"></script>
+    <script>
+      $(function() {
+        $( "#slider" ).slider({
+          range: false,
+          min: 0,
+          max: 7,
+          values: [ 0, 6 ],
+          slide: function( event, ui ) {
+            $( "#amount" ).val(ui.values[ 0 ] + ' days from today');
+            predictMap(ui.values[ 0 ]);
+          }
+        });
+        $( "#amount" ).val( $( "#slider" ).slider( "values", 0 ) + ' days from today' );
+      });
+  </script>
 {% endblock %}

@@ -17,7 +17,7 @@ def handleUpload(file):
 			message.save()
 			zipcode = handleZipcode(message)
 			handleAge(message, zipcode)
-		except ParseError as inst:
+		except:
 			print(i)
 			pass
 		i += 1

@@ -29,6 +29,7 @@ urlpatterns = patterns('',
 
     # Data Requests
     url(r'^statesjson/$', homepage.views.StatesJson),
+    url(r'^statesjsonprediction/(?P<num>[0-9]+)$', homepage.views.Prediction),
     url(r'^ustimegraphjson/$', homepage.views.USTimeGraph),
     url(r'^statetimegraphjson/(?P<state>[A-Z]{2})$', homepage.views.StateTimeGraph),
     url(r'^statesstatisticjson/$', homepage.views.StatesStatisticJson),

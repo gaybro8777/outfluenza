@@ -62,7 +62,7 @@ updateGenderAndAge = function(error, gender, ageInfo) {
 	      .attr("y", function(d) { return y(d.frequency); })
 	      .attr("height", function(d) { return height - y(d.frequency); });
 	  
-	  //svg.exit().remove();
+	  
 	 
 	  d3.select("input").on("change", change);
 	 
@@ -136,8 +136,6 @@ updateGenderAndAge = function(error, gender, ageInfo) {
 		      .data(pie(data));
 		  var g =gData.enter().append("g")
 		      .attr("class", "arc");
-
-		  //gData.exit().remove();
  
 		  g.append("path")
 		      .attr("d", arc)

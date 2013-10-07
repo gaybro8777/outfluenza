@@ -11,10 +11,14 @@ var assignBuckets = function(states) {
 }
 
 var assignBucketsToCounties = function(counties) {
-	var dict = {}
+	var total = 0;
+	var dict = {};
 	for (var i = 0; i < counties.length; i++) {
 		dict[counties[i].pk] = counties[i];
+		counties[i].fields.num_cases = counties[i].fields.num_male_cases + counties[i].fields.num_female_cases
+		total += counties[i].fields.num_cases;
 	}
+	dict['STATE'] = total;
 	return dict;
 }
 

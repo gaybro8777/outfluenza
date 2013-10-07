@@ -14,7 +14,7 @@ from outfluenza.settings import STATIC_URL
 from homepage.homepageHandler import orderZipcodesIntoSortedStates, \
 	orderCountiesFromState, orderMessagesIntoSortedStates, getTopZipcodes, \
 	getTopDrug, orderGenderFromState, orderAgeFromState, orderMessagesIntoState, \
-	getTopMetrics
+	getTopMetrics, predictBuckets
 
 ################################
 # Views
@@ -46,7 +46,7 @@ def ZipcodeSearch(request, zipcode):
 	zippie = int(zipcode)
 	result = zipcodes_to_state[zippie];
 	if result:
-		return HttpResponseRedirect("/state/" + result);
+		return HttpResponse(result);
 	else:
 		return HttpResponseRedirect("/findState/" + zipcode)
 
@@ -54,7 +54,7 @@ def StateSearch(request, state):
 	print(state)
 	result = state_finder[string.replace(state.lower(), "%20", " ")];
 	if result:
-		return HttpResponseRedirect("/state/" + result);
+		return HttpResponse(serializers.serialize("json", {'state':result}, ensure_ascii=False));
 	else:
 		return HttpResponseRedirect("/")
 
@@ -70,6 +70,12 @@ def CountyJson(request, state):
 
 def StatesJson(request):
 	states = orderZipcodesIntoSortedStates()
+	return HttpResponse(serializers.serialize("json", states, ensure_ascii=False))
+
+def Prediction(request, num):
+	states = orderZipcodesIntoSortedStates()
+	for i in range(int(num)):
+		predictBuckets(states)
 	return HttpResponse(serializers.serialize("json", states, ensure_ascii=False))
 
 def StatesStatisticJson(request):

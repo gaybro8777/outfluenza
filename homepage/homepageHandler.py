@@ -21,6 +21,22 @@ def assignBuckets(states):
 			counter = 0
 			curr_bucket -= 1
 
+def predictBuckets(states):
+	for state in states:
+		if state.bucket == 3:
+			state.bucket = 2
+		elif state.bucket == 4:
+			state.bucket = 4
+		elif state.bucket == 5:
+			state.bucket = 6
+		elif state.bucket == 6:
+			state.bucket = 5
+		elif state.bucket == 7:
+			state.bucket = 8
+		elif state.bucket == 8:
+			state.bucket = 8
+
+
 def orderZipcodesIntoSortedStates():
 	states = Zipcode.objects.values('state') \
 		.annotate(num_male_cases=Sum('malePatientCases'), num_female_cases=Sum('femalePatientCases'))
@@ -33,9 +49,10 @@ def orderCountiesFromState(state):
 	counties = Zipcode.objects.filter(state__exact = state) \
 		.values('county') \
 		.annotate(num_male_cases=Sum('malePatientCases'), num_female_cases=Sum('femalePatientCases'))
-	counties = sorted(counties, key=lambda county: county['num_male_cases'] + county['num_female_cases'])
+	counties = sorted(counties, key=lambda county: - county['num_male_cases'] - county['num_female_cases'])
 	assignBuckets(counties)
 	counties = [County().populate(c['county'], c['num_male_cases'], c['num_female_cases'], c['bucket']) for c in counties]
+	print(counties)
 	return counties
 
 def orderMessagesIntoSortedStates():
@@ -97,7 +114,9 @@ def getTopMetrics(state):
 		lastlastmonth.replace(month = 12)
 		lastlastmonth.replace(year = lastlastmonth.year - 1)
 	lastmonthCases = len(Message.objects.filter(state__exact=state, writtenDate__gt=lastlastmonth)) - data.numRecentCases
-	if lastmonthCases == 0:
+	if lastmonthCases == 0 and data.numRecentCases == 0:
+		data.percentIncrease = 0
+	elif lastmonthCases == 0:
 		data.percentIncrease = 100
 	else:
 		data.percentIncrease = (data.numRecentCases - lastmonthCases)*100/lastmonthCases
