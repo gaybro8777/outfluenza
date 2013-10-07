@@ -95,7 +95,6 @@ var handleCounty = function(centered, x, y, k, width, height) {
 				  	.on("click", function(d) { return clicked(d, width, height); });
 		  		
 		  		zipcodeNodes.selectAll('path').each(function(d){
-					console.log("HERE")
 					var percentage = '0';
 					var state = countyDict[d.properties.NAME10.toUpperCase()];
 					if (state) {

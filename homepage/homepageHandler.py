@@ -93,7 +93,7 @@ def getTopMetrics(state):
 	data = TopMetrics()
 	# calculate worstZipcode
 	worstZipcodes = Zipcode.objects.filter(state__exact=state).extra(
-		select={'num_cases':'malePatientCases + femalePatientCases'},
+		select={'num_cases':'\"malePatientCases\" + \"femalePatientCases\"'},
 		order_by=['-num_cases'])
 	if (len(worstZipcodes) > 0):
 		data.worstZipcode = worstZipcodes[0].zipcode
