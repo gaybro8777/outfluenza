@@ -61,14 +61,14 @@ def orderMessagesIntoSortedStates():
 
 def getTopZipcodes():
 	zipcodes = Zipcode.objects.extra(
-		select={'num_cases':'malePatientCases + femalePatientCases'},
+		select={'num_cases':'\"malePatientCases\" + \"femalePatientCases\"'},
 		order_by=['-num_cases'])
 	if len(zipcodes) > 5:
 		return zipcodes[:5]
 	return zipcodes
 
 def getTopDrug():
-	product = Message.objects.values('productCode').annotate(num=Count('productCode')).order_by('-num')[0:5]
+	product = Message.objects.values('productCode').annotate(num=Count('productCode')).order_by('-num')
 	return product[0]['productCode']
 
 def orderGenderFromState(state):
