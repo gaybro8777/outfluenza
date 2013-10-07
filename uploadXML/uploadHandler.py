@@ -21,9 +21,6 @@ def handleUpload(file):
 			print(i)
 			pass
 		i += 1
-		print line
-		if i > 10:
-			break
 
 def createMessage(root):
 	message = Message().defaultFields()
