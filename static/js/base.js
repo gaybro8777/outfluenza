@@ -5,8 +5,8 @@ var handleStateClick = function() {
 	}
 }
 
-var handleZipcodeClick = function() {
-	zipcode = document.getElementById("zipcodeSearch").value;
+var handleZipcodeClick2 = function() {
+	zipcode = document.getElementById("zipSearchBox").value;
 	if (zipcode) {
 		window.location.replace("/find/" + zipcode);
 	}

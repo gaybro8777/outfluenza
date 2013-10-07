@@ -1,6 +1,6 @@
 var updateTimeChart = function(timeMessages) {
-	var w = 750,
-	    h = 400;
+	var w = 450,
+	    h = 275;
 
 	var monthNames = [ "January", "February", "March", "April", "May", "June",
 	    "July", "August", "September", "October", "November", "December" ];

@@ -1,8 +1,8 @@
 updateGenderAndAge = function(error, gender, ageInfo) {
 	/* Age distribution chart */
 	var margin = {top: 20, right: 20, bottom: 30, left: 40},
-	    width = 500 - margin.left - margin.right,
-	    height = 275 - margin.top - margin.bottom;
+	    width = 450 - margin.left - margin.right,
+	    height = 260 - margin.top - margin.bottom;
 	 
 	var formatPercent = d3.format(".0%");
 	 
@@ -52,14 +52,17 @@ updateGenderAndAge = function(error, gender, ageInfo) {
 	      .style("text-anchor", "end")
 	      .text("Frequency");
 	 
-	  svg.selectAll(".bar")
-	      .data(data)
-	    .enter().append("rect")
+	  var svgdata = svg.selectAll(".bar")
+	      .data(data);
+
+	  svgdata.enter().append("rect")
 	      .attr("class", "bar")
 	      .attr("x", function(d) { return x(d.age); })
 	      .attr("width", x.rangeBand())
 	      .attr("y", function(d) { return y(d.frequency); })
 	      .attr("height", function(d) { return height - y(d.frequency); });
+	  
+	  //svg.exit().remove();
 	 
 	  d3.select("input").on("change", change);
 	 
@@ -129,11 +132,13 @@ updateGenderAndAge = function(error, gender, ageInfo) {
 		    d.population = +d.population;
 		  });
 
-		  var g = svgGender.selectAll(".arc")
-		      .data(pie(data))
-		    .enter().append("g")
+		  var gData = svgGender.selectAll(".arc")
+		      .data(pie(data));
+		  var g =gData.enter().append("g")
 		      .attr("class", "arc");
 
+		  //gData.exit().remove();
+ 
 		  g.append("path")
 		      .attr("d", arc)
 		      .style("fill", function(d) { return color(d.data.gender); });

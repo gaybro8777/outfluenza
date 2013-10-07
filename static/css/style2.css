@@ -1,0 +1,227 @@
+.background {
+  fill: none;
+  color: red;
+  pointer-events: all;
+}
+
+/* minimal
+*******************************************************************************/
+button.minimal {
+  background: #e3e3e3;
+  border: 1px solid #bbb;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+  -moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+  box-shadow: inset 0 0 1px 1px #f6f6f6;
+  color: #333;
+  font: bold 12px "helvetica neue", helvetica, arial, sans-serif;
+  line-height: 1;
+  padding: 8px 0 9px;
+  text-align: center;
+  text-shadow: 0 1px 0 #fff;
+  padding: 5px 15px;
+  margin-top: 10px;
+  }
+  button.minimal:hover {
+    background: #d9d9d9;
+    -webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+    -moz-box-shadow: inset 0 0 1px 1px #eaeaea;
+    box-shadow: inset 0 0 1px 1px #eaeaea;
+    color: #222;
+    cursor: pointer; }
+  button.minimal:active {
+    background: #d0d0d0;
+    -webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
+    -moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
+    box-shadow: inset 0 0 1px 1px #e3e3e3;
+    color: #000; }
+    
+.header {
+  padding: 20px 0 0 0;
+    width: 910px;
+    height: 103px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.main {
+    position: fixed;
+    background-color: #fff;
+    top: 120px;
+}
+
+.title {
+    font-family: helvetica;
+    font-size: 25px;
+    font-weight: 100;
+    line-height: 1.4em;
+}
+
+.subtitle {
+    font-family: helvetica;
+    font-size: 18px;
+    line-height: 1.0em;
+    text-align: center;
+    letter-spacing: 0.2em;
+    color: #606060;
+}
+
+.box {
+    border: 5px #fff solid;
+    margin-top: 10px;
+    font-size: 20px;
+    width: 188px;
+    font-family: helvetica;
+    color: rgb(66, 146, 198);
+}
+.counties {
+  fill: none;
+}
+
+.counties .active {
+  fill: orange;
+  stroke: white;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+button {
+    font-family: helvetica;
+}
+
+.states {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}
+
+#mapContainer {
+  margin-top: 70px;
+}
+
+#interactiveMap {
+  margin-top: -40px;
+}
+
+.q0-9 { fill: #EDFBFB; }
+.q1-9 { fill: #DCF7F7; }
+.q2-9 { fill: #B9EEEF; }
+.q3-9 { fill: #95E6E6; }
+.q4-9 { fill: #72DDDE; }
+.q5-9 { fill: #4FD5D6; }
+.q6-9 { fill: #3FAAAB; }
+.q7-9 { fill: #379596; }
+.q8-9 { fill: #286A6B; }
+.q8-9 { fill: #286A6B; }
+.q9-9 { fill: #184040; }
+
+.statsContent {
+  float: left;
+  color: #606060;
+  width: 470px;
+  
+  /* BEWARE HARDCODING */
+  margin-top: -560px;
+  margin-left: 20px;
+}
+
+#statsContainer {
+  position: inline;
+  height: 600px;
+  overflow: scroll !important;
+  width: 500px;
+}
+
+#statsContainer .ui-widget {
+  font-family: "franklin-gothic-urw", helvetica, ariel;
+}
+
+#mapContainer h2.section-heading {
+  margin: 0;
+}
+
+#mapContainer {
+}
+
+#nationalTrends {
+/*    display: none;  */
+}
+
+#stateTrends {
+  display: none;
+}
+
+#border {
+  float: left;
+}
+
+/* Formatting for fact columns */
+/* Column formatting for resume page */
+.columns {
+  line-height: 150%;
+  margin-top: 5px;
+}
+
+.columns .column { 
+  position: relative;
+}
+
+.columns .left {
+  width: 65px;
+  float: left;
+}
+  
+.columns .right {
+  margin-left: 75px;
+  width: 330px;
+  /* BEWARE HARDCODING */
+  height: 75px;
+  margin-top: 10px;
+}
+
+#colorKey {
+  width: 100px;
+  position: absolute;
+  box-shadow: 0 1px 6px 1px rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  
+  /* BEWARE HARDCODING */
+  top: 535px;
+  left: 670px;
+}
+
+body {
+  font-size: 62.5%;
+  font-family: "Trebuchet MS", "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+table {
+  font-size: 1em;
+}
+
+.demo-description {
+  clear: both;
+  padding: 12px;
+  font-size: 1.3em;
+  line-height: 1.4em;
+}
+
+.ui-draggable, .ui-droppable {
+  background-position: top;
+}
+
+#amount {
+  background-color: transparent;
+}
+
+#downloadLink {
+  text-transform: uppercase;
+  font-family: helvetica;
+  font-size: 10px;
+  padding-left: 280px;
+}
+
+#accordion2 div {
+  padding: 0;
+}

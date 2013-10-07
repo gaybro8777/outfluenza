@@ -3,6 +3,7 @@ var assignBuckets = function(states) {
 	var dict = {};
 	for (var i = 0; i < states.length; i++) {
 		dict[states[i].pk] = states[i];
+		states[i].fields.num_cases = states[i].fields.num_male_cases + states[i].fields.num_female_cases
 		total += states[i].fields.num_cases;
 	}
 	dict['US'] = total;

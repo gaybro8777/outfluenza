@@ -1,96 +1,105 @@
-.background {
-	fill: none;
-	pointer-events: all;
-}
-
 body {
-	background-color: #fff;
-	font-family: helvetica;
-	font-size: 13px;
-	color: #555;
-	min-width: 1150px;
-	position: relative;
+  min-width: 1310px;
 }
 
+.nav {
+  letter-spacing: 3px;
+}
 
-/* minimal
-*******************************************************************************/
-button.minimal {
-  background: #e3e3e3;
-  border: 1px solid #bbb;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
-  -moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
-  box-shadow: inset 0 0 1px 1px #f6f6f6;
-  color: #333;
-  font: bold 12px "helvetica neue", helvetica, arial, sans-serif;
-  line-height: 1;
-  padding: 8px 0 9px;
+.mainTitle {
+  font-family: helvetica;
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: 7px;
+  margin-top: 8px;
+}
+
+.mainTitle a {
+  color: #4FD5D6;
+}
+
+.span6 #aboutSection {
+  font-size: 14px;
+  line-height: 150%;
+}
+
+#header #zipSearch {
+  top: 78px;
+  left: 500px;
+  position: absolute;
+}
+
+#header #zipSearch i.icon-search {
+  position: static;
+  margin-left: -5px;
+}
+
+#searchInstructions {
+  color: #606060;
+  position: absolute;
+  
+  /* BEWARE HARDCODING */
+  left: 20px;
+  top: 85px;
+}
+
+#timeSlider {
+  margin-left: 20px;
+  margin-top: -50px;
+}
+
+#timeSlider p {
   text-align: center;
-  text-shadow: 0 1px 0 #fff;
-  padding: 5px 15px;
-  margin-top: 10px;
-  }
-  button.minimal:hover {
-    background: #d9d9d9;
-    -webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
-    -moz-box-shadow: inset 0 0 1px 1px #eaeaea;
-    box-shadow: inset 0 0 1px 1px #eaeaea;
-    color: #222;
-    cursor: pointer; }
-  button.minimal:active {
-    background: #d0d0d0;
-    -webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
-    -moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
-    box-shadow: inset 0 0 1px 1px #e3e3e3;
-    color: #000; }
-    
-.header {
-	  padding: 20px 0 0 0;
-    height: 103px;
-    background-color: #fff;
-    text-align: center;
+  text-transform: uppercase;
+  font-family: helvetica;
+  letter-spacing: 4px;
+  /* BEWARE HARDCODING */
+  margin-left: 20px;
 }
 
-.main {
-    position: fixed;
-    background-color: #fff;
-    top: 120px;
+.header-bottom {
+  border-bottom: 1px solid #ccc;
 }
 
-.maintitle {
-    color: #000;
-    font-family: helvetica;
-    font-size: 50px;
-    font-weight: 100;
+.container {
+  margin-top: 50px;
 }
 
-.title {
-    font-family: helvetica;
-    font-size: 25px;
-    font-weight: 100;
-    line-height: 1.4em;
-
+.tracking {
+  float: center;
 }
 
-.subtitle {
-    font-family: helvetica;
-    font-size: 14px;
-    line-height: 1.0em;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: #000;
-    font-weight: bolder;
+.divider {
+  margin: 20px 0;
+  border-top: 1px solid #ccc;
 }
 
-.navElement {
-	font-size: 18px;
-	font-color: #fff;
+.iconTitles {
+  font-family: "franklin-gothic-urw", helvetica, ariel;
+  color: #4FD5D6;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 3px;
 }
 
-.custom.btn.btn-default {
-	margin-right: 2em;
+.iconBlurbs {
+/*  color: #606060; */
+  color: #999;
+}
+
+#header #zipSearchBox {
+  padding: 18px;
+  margin-bottom: 1px;
+}
+
+#logIn {
+  text-transform: uppercase;
+  padding: 24px 12px 10px 12px;
+  position: absolute;
+  right: 15px;
+  font-family: "franklin-gothic-urw",helvetica,arial,sans-serif;
+  font-color: gray;
+  font-weight: 500;
+  letter-spacing: 1px;
 }

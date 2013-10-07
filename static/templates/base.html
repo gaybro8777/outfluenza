@@ -1,21 +1,32 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 {% load staticfiles %}
-<html>
+<html lang="en" class="wf-adelle-n3-active wf-adelle-n7-active wf-franklingothicurw-n4-active wf-franklingothicurw-n5-active wf-franklingothicurw-n7-active wf-active">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
     <title>Outfluenza</title>
+  </head>
+  <body class="site site-outfluenza">
+    <script>window.Region = "us"</script>
+    <style type="text/css">.tk-adelle{font-family:"adelle",serif;}.tk-franklin-gothic-urw{font-family:"franklin-gothic-urw",sans-serif;}</style>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/typekit.css">
+    <style type="text/css">.tk-adelle{font-family:"adelle",serif;}.tk-franklin-gothic-urw{font-family:"franklin-gothic-urw",sans-serif;}</style>
+    <link rel="stylesheet" href="http://use.typekit.net/c/f2dc83/adelle:n3:n7,franklin-gothic-urw:n4:n5:n7.XK7:M:2,XKF:M:2,VYn:M:2,VyZ:M:2,VYs:M:2/d?3bb2a6e53c9684ffdc9a9bf71f5b2a623df248a4a1ae63c3259906c9627736f90ba116edc5f991bd5b4a7fb6cf13ec53d4174b1a572e5d3133dc9b94b5a5c53883ba6e82be110b19785e8b1b69ab72f44b57e8e2df9f2055ff087ea0615ce200b5dd5006bcc1f3e194a33dcdbc7dfcf37511a4">
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style2.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/giantStyle.css">
+    
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/d3.v3.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/queue.v1.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/topojson.v1.min.js"></script>
+    <!--script src="{{ STATIC_URL }}js/script.js" type="text/javascript"></script><style type="text/css"></style-->
+    <!--script src="{{ STATIC_URL }}js/script2.js" type="text/javascript"></script-->
     <script type="text/javascript" src="{{ STATIC_URL }}js/base.js"></script>
-  </head>
-  <body>
-    <div class="header">
+    <!--div class="header">
         <span class="maintitle">Live Influenza Tracking</span>
         <br /><span class="subtitle">
         Realtime information on the spread of influenza</span>
@@ -28,12 +39,6 @@
             </div>
             <button type="button" class="custom btn btn-default" onClick="JavaScript:handleZipcodeClick()">GO</button>
         </form>
-        <!--form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input id="stateSearch" type="text" class="form-control" placeholder="Enter State">
-            </div>
-            <button type="button" class="custom btn btn-default" onClick="JavaScript:handleStateClick()">GO</button>
-        </form-->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="navElement"><a href="/">
@@ -47,7 +52,31 @@
                 </a></li>
             </ul>
         </div>
-    </nav>
+    </nav-->
+<div id="StayFocusd-infobar" style="display:none;"></div>
+<div id="header" class="header-bottom">
+    <div class="row">
+        <div class="span4 mainTitle">
+            <a href="/">OUTFLUENZA</a>
+        </div>
+        <div class="span4">
+            <ul class="nav nav-pills">
+                <li class="dropdown">
+                    <a href="/" data-target="culture">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="/team" data-target="culture">Team</a>
+                </li>
+                <li class="dropdown">
+                    <a href="/instructions" data-target="culture">How it Works</a>
+                </li>
+            </ul>
+        </div>
+        <div id="logIn">
+            Sign up &nbsp;&nbsp;  | &nbsp;&nbsp;  Log In
+        </div>
+    </div>
+</div>
 
     {% block extra_header %}
     {% endblock %}

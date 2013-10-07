@@ -1,9 +1,8 @@
 body {
 	background-color: #fff;
-	font-family: 'Open Sans', helvetica;
+	font-family: "franklin-gothic-urw",Helvetica,Arial,sans-serif,sans-serif;
 	font-size: 13px;
 	color: #555;
-	min-width: 750px;
 }
 
 .border {
@@ -17,7 +16,7 @@ body {
 	font-size: 15px;
 }
 
-.statsheader {
+.header {
 	background-color: #343434;
 	height: 34px;
 	position: relative;
@@ -32,7 +31,6 @@ body {
 
 .section {
 	padding-bottom: 40px;
-    text-align: center;
 }
 
 .textCircle {
@@ -56,7 +54,7 @@ body {
     margin: 0 10px;
 }
 
-.statsmaintitle {
+#statsContainer .maintitle {
 	font-family: helvetica;
     font-size: 20px;
     line-height: 1.0em;
@@ -70,7 +68,7 @@ body {
     width: 100%;
 }
 
-.statssubtitle {
+.subtitle {
     font-family: helvetica;
     font-size: 15px;
     line-height: 1.0em;
@@ -82,8 +80,24 @@ body {
 }
 
 .graphtitle {
-	font-style: italic;
 	color: #c0c0c0;
+	font-family: "franklin-gothic-urw",Helvetica,Arial,sans-serif,sans-serif;
+	margin: 10px 0;
+	font-size: 14px;
+}
+
+.regionName {
+	display: inline;
+	text-align: center;
+	font-family: helvetica;
+	font-weight: bold;
+	font-size: 18px;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	
+	/* BEWARE HARDCODING */
+	margin-left: 150px;
+	margin-bottom: 20px;
 }
 
 /* Formatting for sortable bar chart. */
@@ -110,7 +124,24 @@ body {
 label {
   position: absolute;
   top: 10px;
-  right: 80px;
+  left: 250px;
+  font-family: helvetica;
+  font-size: 10px;
+  float: left;
+}
+
+#labelTitle {
+	float: left;
+	/* BEWARE HARDCODING */
+	margin-left: 4px;
+}
+
+#timeChartContainer {
+	position: relative;
+}
+
+#checkbox {
+	float: left;
 }
 
 #ageDistribution {
@@ -126,48 +157,75 @@ label {
   stroke: #fff;
 }
 
-/* Top drugs table. */
-#rounded-corner{
+#genderSplit {
+	/* BEWARE HARDCODING */
+	margin-left: 70px;
+}
+
+/* Table formatting. */
+.table-corner{
     font-family:"Helvetica Neue", "Open Sans";
     font-size:12px;
-    width:700px;
+    width:430px;
     text-align:left;
     border-collapse:collapse;
     margin:20px;
 }
 
-#rounded-corner th{
+.table-corner th{
     font-weight:normal;
     font-size:13px;
     color: white;
-    background:#FE7569;
     padding:8px;
 }
 
-#rounded-corner td{
-    background:	#FFC8C3;
+.stateHeader {
+	background:#FE7569;
+}
+
+.drugHeader {
+	background: #ACD661;
+}
+
+.zipHeader {
+	background: #379596;
+}
+
+.table-corner td{
     border-top:1px solid #fff;
     color:black;
     padding:8px;
 }
 
-#rounded-corner tbody tr:hover td{
+.stateBody {
+	background:	#FFC8C3;
+}
+
+.zipBody {
+	background: #B9EEEF;
+}
+
+.drugBody {
+	background: #E7FCC4;
+}
+
+.table-corner tbody tr:hover td{
     background:#CDFFFF;
 }
 
-.drugRank {
+.tableRank {
 	font-weight: bold;
 	text-align: right;
 }
 
-.drugData {
-	text-align: center;
+.tableData {
+	text-align: left;
 }
 
 /* Tabs for time lapse graph. */
 #flip-tabs{
-	width:500px;
-	margin: 20px 0 0 50px;
+	/* BEWARE HARDCODING */
+	margin: 10px 0 0 40px;
 	position:absolute;
 }
 
@@ -181,11 +239,14 @@ label {
 }
 
 #flip-navigation li a{
-	text-decoration:none; padding:10px; 
+	text-decoration:none; 
+	padding:6px 12px; 
 	margin-right:0px;
 	background:#f9f9f9;
 	color:#333; outline:none;
-	font-family:Helvetica; font-size:12px; text-transform:uppercase;
+	font-family:Helvetica; 
+	font-size:8px; 
+	text-transform:uppercase;
 	letter-spacing: 0.2em;
 }
 

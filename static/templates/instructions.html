@@ -1,12 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
+<!--div class="container">
 	<div class="jumbotron">
 	    <h1>How to use the tracking software:</h1>
 	    <p class="lead">Instructions will be added shortly.
 	    </p>
 	    <p><a class="btn btn-lg btn-success" href="/">Try it today.</a></p>
+	</div>
+</div-->
+
+
+<div class="container">
+	<div class="row-fluid">
+		<div class="span2"></div>
+		<div class="span3 offset1">
+			<img src="{{ STATIC_URL }}img/tracking.png" class="tracking">
+			<span class="iconTitles">1. Search</span>
+			<hr class="divider" id="specialDivider">
+			<span class="iconBlurbs">Outfluenza gathers unstructured e-prescription data and organizes it, so you can easily search for detailed statistics and trends happening in specific areas.</span>
+		</div>
+		<div class="span3 offset1">
+			<img src="{{ STATIC_URL }}img/visualization.png">
+			<span class="iconTitles">2. Visualize</span>
+			<hr class="divider">
+			<span class="iconBlurbs">Outfluenza provides beautiful visualizations to show you how influenza is currently spreading as well as instant statistics on the demographic breakdown and rate of spread of the disease.</span>
+		</div>
+		<div class="span3 offset1">
+			<img src="{{ STATIC_URL }}img/prediction.png"></img>
+			<span class="iconTitles">3. Predict</span>
+			<hr class="divider">
+			<span class="iconBlurbs">Outfluenza applies machine learning algorithms to predict how influenza will spread in the future and alerts doctors to outbreaks before they happen.</span>
+		</div>
 	</div>
 </div>
 {% endblock %}

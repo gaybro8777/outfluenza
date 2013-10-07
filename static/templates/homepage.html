@@ -1,11 +1,243 @@
 {% extends "base.html" %}
 {% block content %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/homepage.css">
-    <div class="topStats">
+    <!--link rel="stylesheet" href="{{ STATIC_URL }}css/homepage.css"-->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery-ui.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/statsStyle.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/d3LineChart.css" />
+    <div id="header">
+      <form action="JavaScript:handleZipcodeClick()" class="search" id="zipSearch">
+      <input class="search-box" onClick="JavaScript:handleZipcodeClick()" placeholder="Enter ZIP or State" type="text" id="zipSearchBox">
+      <i class="icon-search"></i>
+      </form>
+    </div>
+    <div id="searchInstructions">
+      Search here or click on the map to get more detailed statistics about a specific region.
+    </div>
+
+    <div class="row">
+      <div class="span10" id="mapContainer">
+        <h2 class="section-heading" id="mapTitle">Influenza across the US</h2>
+        <div id="interactiveMap"></div>
+        <div id="timeSlider">
+          <p>Currently showing data from: <input type="text" id="amount" style="border: 0; padding: 0; margin: 0; font-size: 13px; height: 18px; color: black; font-weight: bold;" /></p>
+          <div id="slider"></div> 
+        </div>
+      </div>
+      <div id="statsContainer" class="span3">
+        <div class="filler"></div>
+        <img src="{{ STATIC_URL }}img/leftBorder.png" id="border" height="600px">
+        <div class="statsContent" id="nationalTrends">
+        <div class="regionName">National Trends</div><br><br>
+        <div id="accordion2">
+          <h3>Most infected states</h3>
+          <div>
+            <!--table class="table-corner">
+              <thead>
+              <tr>
+              <th scope="col" class="table-rank stateHeader"></th>
+              <th scope="col" class="table-company stateHeader">State</th>
+              <th scope="col" class="table-q1 tableData stateHeader">Number of influenza cases</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+              <td class="tableRank stateBody">1.</td>
+              <td class="stateBody"><b>California</b></td>
+              <td class="tableData stateBody">3</td>
+              </tr>
+              <tr>
+              <td class="tableRank stateBody">2.</td>
+              <td class="stateBody"><b>New York</b></td>
+              <td class="tableData stateBody">3</td>
+              </tr>
+              <tr>
+              <td class="tableRank stateBody">3.</td>
+              <td class="stateBody"><b>Arizona</b></td>
+              <td class="tableData stateBody">3</td>
+              </tr>
+              <tr>
+              <td class="tableRank stateBody">4.</td>
+              <td class="stateBody"><b>New Jersey</b></td>
+              <td class="tableData stateBody">1</td>
+              </tr>
+              <tr>
+              <td class="tableRank stateBody">5.</td>
+              <td class="stateBody"><b>Montana</b></td>
+              <td class="tableData stateBody">3</td>
+              </tr>
+              </tbody>
+              </table-->
+              <div id="topStatesTable"></div>
+          </div>
+          <h3>Most infected zip codes</h3>
+          <div>
+            <!--table class="table-corner">
+              <thead>
+              <tr>
+              <th scope="col" class="table-rank zipHeader" class=""></th>
+              <th scope="col" class="table-company zipHeader">Zip Code</th>
+              <th scope="col" class="table-q1 tableData zipHeader">State Zip is In</th>
+              <th scope="col" class="table-q2 tableData zipHeader">Number of influenza cases</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+              <td class="tableRank zipBody">1.</td>
+              <td class="zipBody"><b>Tamiflu</b></td>
+              <td class="tableData zipBody">3</td>
+              <td class="tableData zipBody">423</td>
+              </tr>
+              <tr>
+              <td class="tableRank zipBody">2.</td>
+              <td class="zipBody"><b>Relenza</b></td>
+              <td class="tableData zipBody">3</td>
+              <td class="tableData zipBody">406</td>
+              </tr>
+              <tr>
+              <td class="tableRank zipBody">3.</td>
+              <td class="zipBody"><b>Symmetrel</b></td>
+              <td class="tableData zipBody">3</td>
+              <td class="tableData zipBody">302</td>
+              </tr>
+              <tr>
+              <td class="tableRank zipBody">4.</td>
+              <td class="zipBody"><b>Flumadine</b></td>
+              <td class="tableData zipBody">1</td>
+              <td class="tableData zipBody">156</td>
+              </tr>
+              <tr>
+              <td class="tableRank zipBody">5.</td>
+              <td class="zipBody"><b>Zanamivir</b></td>
+              <td class="tableData zipBody">3</td>
+              <td class="tableData zipBody">154</td>
+              </tr>
+              </tbody>
+              </table-->
+              <div id="topZipcodesTable"></div>
+          </div>
+          <h3>Most frequently prescribed drugs</h3>
+          <div>
+            <table class="table-corner">
+              <thead>
+              <tr>
+              <th scope="col" class="table-rank drugHeader" class=""></th>
+              <th scope="col" class="table-company drugHeader">Drug</th>
+              <th scope="col" class="table-q1 tableData drugHeader">Average Dosage</th>
+              <th scope="col" class="table-q2 tableData drugHeader">Prescriptions in NJ</th>
+              <th scope="col" class="table-q3 tableData drugHeader">Average prescriptions (across all table)</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+              <td class="tableRank drugBody">1.</td>
+              <td class="drugBody"><b>Tamiflu</b></td>
+              <td class="tableData drugBody">3</td>
+              <td class="tableData drugBody">423</td>
+              <td class="tableData drugBody">335</td>
+              </tr>
+              <tr>
+              <td class="tableRank drugBody">2.</td>
+              <td class="drugBody"><b>Relenza</b></td>
+              <td class="tableData drugBody">3</td>
+              <td class="tableData drugBody">406</td>
+              <td class="tableData drugBody">452</td>
+              </tr>
+              <tr>
+              <td class="tableRank drugBody">3.</td>
+              <td class="drugBody"><b>Symmetrel</b></td>
+              <td class="tableData drugBody">3</td>
+              <td class="tableData drugBody">302</td>
+              <td class="tableData drugBody">333</td>
+              </tr>
+              <tr>
+              <td class="tableRank drugBody">4.</td>
+              <td class="drugBody"><b>Flumadine</b></td>
+              <td class="tableData drugBody">1</td>
+              <td class="tableData drugBody">156</td>
+              <td class="tableData drugBody">223</td>
+              </tr>
+              <tr>
+              <td class="tableRank drugBody">5.</td>
+              <td class="drugBody"><b>Zanamivir</b></td>
+              <td class="tableData drugBody">3</td>
+              <td class="tableData drugBody">154</td>
+              <td class="tableData drugBody">223</td>
+              </tr>
+              </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+      <div class="statsContent" id="stateTrends">
+        <div id="stateName" class="regionName"></div><br><br>
+        <div id="accordion">
+          <h3>General Statistics</h3>
+          <div>
+            <div class="columns">
+              <div class="left column">
+                <img src="{{ STATIC_URL }}img/calendar.png">
+              </div>
+              <div class="right column">The rate of increase of influenza cases  from this time last month is: <span class="emphasis"><div id='percentIncrease'></div></span>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="left column">
+                <img src="{{ STATIC_URL }}img/syringe.png">
+              </div>
+              <div class="right column">Over the last month, there has been an average of <span class="emphasis"><div id='numRecentCases'></div></span>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="left column">
+                <img src="{{ STATIC_URL }}img/googleMaps.png">
+              </div>
+              <div class="right column">
+                <br>The nearest outbreak is at zipcode: <span class="emphasis"><div id='worstZipcode'></div></span>
+              </div>
+            </div>
+          </div>
+          <h3>Time lapse</h3>
+          <div>
+            <div id="timeChartContainer">
+              <div id="flip-tabs">  
+                <ul id="flip-navigation" >  
+                  <li><a href="#" id="tab-0"  >Week</a></li>  
+                  <li class="selected"><a href="#" id="tab-1" >Month</a></li>  
+                  <li><a href="#" id="tab-2" >Year</a></li>  
+                </ul>   
+              </div>  
+              <div id="chart"></div>
+              <a href="http://www.google.com" id="downloadLink">Download CSV file  >></a>
+            </div>
+          </div>
+          <h3>Gender breakdown</h3>
+            <div>
+              <div id="genderSplit"></div>
+              <a href="http://www.google.com" id="downloadLink">Download CSV file  >></a>
+            </div>
+          <h3>Age distribution</h3>
+          <div>
+            <div id="ageDistribution">
+              <label><input type="checkbox" id="checkbox"><span id="labelTitle">Sort values</span></label>
+            </div>
+            <a href="http://www.google.com" id="downloadLink">Download CSV file  >></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div id="colorKey">
+      <img src="{{ STATIC_URL }}img/colorKey.png">
+    </div>
+
+
+
+    <!--div class="topStats">
         <div class="container">
            <div class="topStatsHeader">Top Current Statistics</div> <br />
-    	   <div class="topStatsTableHeader">States with the highest # of cases</div>
-    	   <div id="topStatesTable"></div>
+         <div class="topStatsTableHeader">table with the highest # of cases</div>
+         <div id="toptableTable"></div>
            <div class="topStatsTableHeader">Zipcodes with the most patients</div>
            <div id="topZipcodesTable"></div>
            <div id="topCountiesTable"></div>
@@ -13,10 +245,15 @@
         </div>
     </div>
     <div id="interactiveMap"></div>
-    <div id="statistics"></div>
+    <div id="statistics"></div-->
+    
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepageHelper.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/genderAndAge.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.tipsy.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/d3LineChart.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepageMap.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepageStatistics.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepageTopStatistics.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/homepage.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery-ui.js"></script>
 {% endblock %}

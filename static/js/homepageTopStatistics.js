@@ -1,6 +1,9 @@
-(function($){
-	$.fn.updateTopStateStats = function(error, states) {
-
+var updateTopStateStats = function(error, states) {
+		var index = 0;
+		var iterVal = function() {
+			index++;
+			return index+'.';
+		}
 		var data_states = states;
 		if (states.length > 3) {
 			data_states = states.slice(0, 3);
@@ -13,20 +16,19 @@
 	    var table = d3.select("#topStatesTable").append("table")
 			.attr("width", width)
 			.attr("height", height)
-			.attr('class', 'table table-hover')
+			.attr('class', 'table-corner')
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 			
 		table.append('thead').append('tr')
 				.style('background-color', function(d,i) {
 					return i%2 ? '#fbfbfb' : '#fdfdfd';
 				})
-				.selectAll('td')
-				.data(["State", "# Patients"])
+				.selectAll('th')
+				.data(["", "State", "# Patients"])
 				.enter()
-				.append('td')
+				.append('th')
 				.text(function(d) { return d})
-				.style('text-align', 'center')
-				.style('font-weight', 'bold');
+				.attr('class', 'table-rank stateHeader');
 
 		var rows = table.append('tbody').selectAll('tr')
 			.data(data_states)
@@ -38,16 +40,21 @@
 
 		rows.selectAll('td')
 			.data(function(row) {
-				return [row.pk, row.fields.num_female_cases + row.fields.num_male_cases]
+				return [iterVal(), row.pk, row.fields.num_female_cases + row.fields.num_male_cases]
 			})
 			.enter()
 			.append('td')
-			.style('text-align', 'center')
+			.attr('class', 'tableData stateBody')
 			.text(function(d) { return d});
 
 	};
 
-	$.fn.updateTopZipcodeStats = function(error, zipcodes) {
+var updateTopZipcodeStats = function(error, zipcodes) {
+		var index = 0;
+		var iterVal = function() {
+			index++;
+			return index+'.';
+		}
 		var width = 280,
 	    	height = 100,
 	    	margin = {top: 10, right: 10, bottom: 10, left: 10};
@@ -57,7 +64,7 @@
 			.attr("height", height)
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 			.append("table")
-			.attr('class', 'table table-hover')
+			.attr('class', 'table-corner')
 			.style('align', 'center')
 			.append('tbody');
 		
@@ -65,13 +72,12 @@
 				.style('background-color', function(d,i) {
 					return i%2 ? '#fbfbfb' : '#fdfdfd';
 				})
-				.selectAll('td')
-				.data(["Zipcode", "State", "# Patients"])
+				.selectAll('th')
+				.data(["","Zip Code", "State Zip is in", "Number of Influenza Patients"])
 				.enter()
-				.append('td')
-				.text(function(d) { return d})
-				.style('text-align', 'center')
-				.style('font-weight', 'bold');
+				.append('th')
+				.attr('class', 'table-company zipHeader')
+				.text(function(d) { return d; });
 
 		var rows_states = table.append('tbody').selectAll('tr')
 			.data(zipcodes)
@@ -83,11 +89,10 @@
 
 		rows_states.selectAll('td')
 			.data(function(row) {
-				return [row.pk, row.fields.state, row.fields.malePatientCases + row.fields.femalePatientCases]
+				return [iterVal(), row.pk, row.fields.state, row.fields.malePatientCases + row.fields.femalePatientCases]
 			})
 			.enter()
 			.append('td')
-			.style('text-align', 'center')
+			.attr('class', 'tableData zipBody')
 			.text(function(d) { return d});
 	};
-})(jQuery);
