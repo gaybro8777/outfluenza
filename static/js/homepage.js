@@ -7,7 +7,6 @@ queue()
     .await(ready);
 
 function ready(error, us, states, topZipcodes) {
-  console.log(states)
   updateTopStateStats(error, states);
 	updateTopZipcodeStats(error, topZipcodes);
 	globalUS = us;

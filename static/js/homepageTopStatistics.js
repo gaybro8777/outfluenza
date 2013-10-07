@@ -5,7 +5,9 @@ var updateTopStateStats = function(error, states) {
 			return index+'.';
 		}
 		var data_states = states;
-		data_states = states.slice(0, 3);
+		if (states.length > 3) {
+			data_states = states.slice(0, 3);
+		}
 
 		var width = 250,
 	    	height = 100,
