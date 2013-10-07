@@ -4,7 +4,7 @@ var path = d3.geo.path().projection(projection);
 
 	var g;
 	var zipcodeNodes;
-	var bucketDict
+	var bucketDict;
 
 var updateMap = function(error, us, states) {
 	var width = 780;

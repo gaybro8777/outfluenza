@@ -88,8 +88,7 @@
               <th scope="col" class="table-rank drugHeader" class=""></th>
               <th scope="col" class="table-company drugHeader">Drug</th>
               <th scope="col" class="table-q1 tableData drugHeader">Average Dosage</th>
-              <th scope="col" class="table-q2 tableData drugHeader">Prescriptions in NJ</th>
-              <th scope="col" class="table-q3 tableData drugHeader">Average prescriptions (across all table)</th>
+              <th scope="col" class="table-q3 tableData drugHeader">Average prescriptions (across all states)</th>
               </tr>
               </thead>
               <tbody>
@@ -97,35 +96,30 @@
               <td class="tableRank drugBody">1.</td>
               <td class="drugBody"><b>Tamiflu</b></td>
               <td class="tableData drugBody">3</td>
-              <td class="tableData drugBody">423</td>
               <td class="tableData drugBody">335</td>
               </tr>
               <tr>
               <td class="tableRank drugBody">2.</td>
               <td class="drugBody"><b>Relenza</b></td>
               <td class="tableData drugBody">3</td>
-              <td class="tableData drugBody">406</td>
               <td class="tableData drugBody">452</td>
               </tr>
               <tr>
               <td class="tableRank drugBody">3.</td>
               <td class="drugBody"><b>Symmetrel</b></td>
               <td class="tableData drugBody">3</td>
-              <td class="tableData drugBody">302</td>
               <td class="tableData drugBody">333</td>
               </tr>
               <tr>
               <td class="tableRank drugBody">4.</td>
               <td class="drugBody"><b>Flumadine</b></td>
               <td class="tableData drugBody">1</td>
-              <td class="tableData drugBody">156</td>
               <td class="tableData drugBody">223</td>
               </tr>
               <tr>
               <td class="tableRank drugBody">5.</td>
               <td class="drugBody"><b>Zanamivir</b></td>
               <td class="tableData drugBody">3</td>
-              <td class="tableData drugBody">154</td>
               <td class="tableData drugBody">223</td>
               </tr>
               </tbody>
@@ -212,11 +206,11 @@
           max: 7,
           values: [ 0, 6 ],
           slide: function( event, ui ) {
-            $( "#amount" ).val(ui.values[ 0 ] + ' days from today');
+            $( "#amount" ).val(ui.values[ 0 ] + ' days from now');
             predictMap(ui.values[ 0 ]);
           }
         });
-        $( "#amount" ).val( $( "#slider" ).slider( "values", 0 ) + ' days from today' );
+        $( "#amount" ).val( 'current data. Move the slider below for predictions.' );
       });
   </script>
 {% endblock %}
