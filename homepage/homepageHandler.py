@@ -61,10 +61,8 @@ def orderMessagesIntoSortedStates():
 
 def getTopZipcodes():
 	zipcodes = Zipcode.objects.extra(
-		select={'num_cases':'\"malePatientCases\" + \"femalePatientCases\"'},
-		order_by=['-num_cases'])
-	if len(zipcodes) > 5:
-		return zipcodes[:5]
+		select={'num_cases':'malePatientCases + femalePatientCases'},
+		order_by=['-num_cases'])[:5]
 	return zipcodes
 
 def getTopDrug():
@@ -93,7 +91,7 @@ def getTopMetrics(state):
 	data = TopMetrics()
 	# calculate worstZipcode
 	worstZipcodes = Zipcode.objects.filter(state__exact=state).extra(
-		select={'num_cases':'\"malePatientCases\" + \"femalePatientCases\"'},
+		select={'num_cases':'malePatientCases + femalePatientCases'},
 		order_by=['-num_cases'])
 	if (len(worstZipcodes) > 0):
 		data.worstZipcode = worstZipcodes[0].zipcode
