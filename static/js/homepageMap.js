@@ -5,6 +5,7 @@ var path = d3.geo.path().projection(projection);
 	var g;
 	var zipcodeNodes;
 	var bucketDict;
+	var pathDict;
 
 var updateMap = function(error, us, states) {
 	var width = 780;
@@ -25,7 +26,8 @@ var updateMap = function(error, us, states) {
 		.translate([width / 2, (height - 100)/ 2])
 
 	bucketDict = assignBuckets(states);
-	
+	pathDict = assignPaths(topojson.feature(us, us.objects.state).features);
+
 	var svg = d3.select("#interactiveMap").append("svg")
 		.attr("width", width)
 		.attr("height", height)
@@ -200,5 +202,15 @@ var handleZipcodeClick = function() {
 		var yea = clicked(d3.json("/find/"+entry));
 		console.log(yea);
 	}
+};
+
+var searchClick = function() {
+  	var width = 780;
+	var height = 600;
+	var search = document.getElementById("zipSearchBox").value;
+  if (search) {
+    var d = pathDict[search.toUpperCase()];
+    if (d) clicked(d, width, height);
+  }
 };
 

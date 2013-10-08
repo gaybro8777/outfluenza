@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/statsStyle.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/d3LineChart.css" />
     <div id="header">
-      <form class="search" id="zipSearch">
-      <input class="search-box" placeholder="Enter ZIP or State" type="text" id="zipSearchBox">
-      <i class="icon-search"></i>
-      </form>
+      <div class="search" id="zipSearch">
+        <input onkeydown="if (event.keyCode == 13) searchClick()" class="search-box" placeholder="Enter ZIP or State" type="text" id="zipSearchBox">
+        <i onclick="Javascript:searchClick()" class="icon-search"></i>
+      </div>
     </div>
     <div id="searchInstructions">
       Search here or click on the map to get more detailed statistics about a specific region.
@@ -36,48 +36,6 @@
           </div>
           <h3>Most infected zip codes</h3>
           <div>
-            <!--table class="table-corner">
-              <thead>
-              <tr>
-              <th scope="col" class="table-rank zipHeader" class=""></th>
-              <th scope="col" class="table-company zipHeader">Zip Code</th>
-              <th scope="col" class="table-q1 tableData zipHeader">State Zip is In</th>
-              <th scope="col" class="table-q2 tableData zipHeader">Number of influenza cases</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-              <td class="tableRank zipBody">1.</td>
-              <td class="zipBody"><b>Tamiflu</b></td>
-              <td class="tableData zipBody">3</td>
-              <td class="tableData zipBody">423</td>
-              </tr>
-              <tr>
-              <td class="tableRank zipBody">2.</td>
-              <td class="zipBody"><b>Relenza</b></td>
-              <td class="tableData zipBody">3</td>
-              <td class="tableData zipBody">406</td>
-              </tr>
-              <tr>
-              <td class="tableRank zipBody">3.</td>
-              <td class="zipBody"><b>Symmetrel</b></td>
-              <td class="tableData zipBody">3</td>
-              <td class="tableData zipBody">302</td>
-              </tr>
-              <tr>
-              <td class="tableRank zipBody">4.</td>
-              <td class="zipBody"><b>Flumadine</b></td>
-              <td class="tableData zipBody">1</td>
-              <td class="tableData zipBody">156</td>
-              </tr>
-              <tr>
-              <td class="tableRank zipBody">5.</td>
-              <td class="zipBody"><b>Zanamivir</b></td>
-              <td class="tableData zipBody">3</td>
-              <td class="tableData zipBody">154</td>
-              </tr>
-              </tbody>
-              </table-->
               <div id="topZipcodesTable"></div>
           </div>
           <h3>Most frequently prescribed drugs</h3>
@@ -209,7 +167,7 @@
             predictMap(ui.values[ 0 ]);
           }
         });
-        $( "#amount" ).val( 'current data. Move the slider below for predictions.' );
+        $( "#amount" ).val( 'current data. Move the slider.' );
       });
   </script>
 {% endblock %}

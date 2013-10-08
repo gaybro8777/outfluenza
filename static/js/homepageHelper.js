@@ -25,3 +25,12 @@ var assignBucketsToCounties = function(counties) {
 var firstKey = function(obj) {
     for (var a in obj) return a;
 }
+
+var assignPaths = function(us) {
+	var dict = {};
+	for (var i = 0; i < us.length; i++) {
+		dict[us[i].properties.NAME10.toUpperCase()] = us[i];
+		dict[us[i].properties.STUSPS10.toUpperCase()] = us[i];
+	}
+	return dict;
+}
