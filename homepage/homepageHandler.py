@@ -70,7 +70,10 @@ def getTopDrug():
 	return product[0]['productCode']
 
 def orderGenderFromState(state):
-	zipcodes = Zipcode.objects.filter(state__exact = state)
+	if state == 'US':
+		zipcodes = Zipcode.objects.all()
+	else:
+		zipcodes = Zipcode.objects.filter(state__exact = state)
 	gender = Gender().populate(state)
 	for zipcode in zipcodes:
 		gender.male += zipcode.malePatientCases
@@ -78,12 +81,18 @@ def orderGenderFromState(state):
 	return gender
 
 def orderAgeFromState(state):
-	ages = Age.objects.filter(state__exact=state).values('age').annotate(num_cases=Sum('num_cases'))
+	if state == 'US':
+		ages = Age.objects.all().values('age').annotate(num_cases=Sum('num_cases'))
+	else:
+		ages = Age.objects.filter(state__exact=state).values('age').annotate(num_cases=Sum('num_cases'))
 	ages = [DisplayAge().populate(a['age'], a['num_cases']) for a in ages]
 	return ages
 
 def orderMessagesIntoState(state):
-	messages = Message.objects.filter(state__exact=state).values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
+	if state == 'US':
+		messages = Message.objects.all().values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
+	else:
+		messages = Message.objects.filter(state__exact=state).values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
 	messages = [USTimeGraphJson().populate(m['writtenDate'], m['num']) for m in messages]
 	return messages
 

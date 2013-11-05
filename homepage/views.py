@@ -51,7 +51,6 @@ def ZipcodeSearch(request, zipcode):
 		return HttpResponseRedirect("/findState/" + zipcode)
 
 def StateSearch(request, state):
-	print(state)
 	result = state_finder[string.replace(state.lower(), "%20", " ")];
 	if result:
 		return HttpResponse(serializers.serialize("json", {'state':result}, ensure_ascii=False));

@@ -4,11 +4,16 @@ queue()
     .defer(d3.json, "/static/data/us_states_topo.json")
     .defer(d3.json, "/statesjson")
     .defer(d3.json, "/topzipcodesjson")
+    .defer(d3.json, "/genderjson/US")
+    .defer(d3.json, "/agejson/US")
+    .defer(d3.json, "/statetimegraphjson/US")
     .await(ready);
 
-function ready(error, us, states, topZipcodes) {
+function ready(error, us, states, topZipcodes, genderUS, ageUS, timeUS) {
   updateTopStateStats(error, states);
 	updateTopZipcodeStats(error, topZipcodes);
+  updateGenderAndAge(error, genderUS, ageUS);
+  updateTimeChart(timeUS);
 	globalUS = us;
 	updateMap(error, us, states);
 	//updateStatistics(error, stateStatistics);

@@ -16,3 +16,12 @@ psycopg2==2.5.1
 gunicorn==18.0
 django-bootstrap-toolkit==2.15.0
 South==0.7.3
+swig==2.0.11
+scipy==0.13.0
+freetype==2.5.0.1
+matplotlib==1.3.1
+ipython==1.1.0
+PyQt-mac-gpl==4.10.3
+zeromq==3.2.3
+pyzmq==14.0.0
+Pygments==1.6

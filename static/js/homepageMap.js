@@ -151,6 +151,21 @@ var clicked = function(d, width, height) {
 		handleCounty(centered, x, y, k, width, height);	
 	  } 
 	
+	// clicking on a county
+	/*else if (d && centered != d) {
+		var county = d.properties.NAME10;
+		queue()
+		    .defer(d3.json, "/countygenderjson/" + county)
+		    .defer(d3.json, "/countyagejson/" + county)
+		    .defer(d3.json, "/countytimegraphjson/" + county)
+			.await( 
+				function(genderInfo, ageInfo, timeMessages) {
+					updateGenderAndAge(error, genderInfo, ageInfo);
+					updateTimeChart(timeMessages);
+				}
+			);
+	}*/
+	
 	// if zooming out
 	else {
 	    x = width / 2;
