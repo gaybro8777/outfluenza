@@ -120,9 +120,10 @@ var handleCounty = function(centered, x, y, k, width, height) {
 	}
 	else {
 		zipcodeNodes.selectAll('path').data([]).exit().remove();
-		d3.select("#ageDistribution").selectAll('svg').data([]).exit().remove();
-		d3.select("#genderSplit").selectAll('svg').data([]).exit().remove();
-		d3.select("#chart").selectAll('svg').data([]).exit().remove();
+		d3.selectAll("#ageDistribution").selectAll('svg').data([]).exit().remove();
+		d3.selectAll("#genderSplit").selectAll('svg').data([]).exit().remove();
+		d3.selectAll("#chart").selectAll('svg').data([]).exit().remove();
+		d3.selectAll("#predictions").selectAll('svg').data([]).exit().remove();
 	}
 };
 
@@ -199,23 +200,24 @@ var handleStats = function(stateObj) {
 	    .defer(d3.json, "/agejson/" + state)
 	    .defer(d3.json, "/statetimegraphjson/" + state)
 	    .defer(d3.json, "/topmetrics/" + state)
+	    .defer(d3.json, "/getpredictions/" + state)
 	    .await(readyState);
 };
 
-var readyState = function(error, stateJson, counties, genderInfo, ageInfo, timeMessages, metrics) {
+var readyState = function(error, stateJson, counties, genderInfo, ageInfo, timeMessages, metrics, predictions) {
 	var data = metrics[0].fields;
 	document.getElementById("worstZipcode").innerHTML=data.worstZipcode;
 	document.getElementById("numRecentCases").innerHTML=data.numRecentCases + ' new cases';
 	document.getElementById("percentIncrease").innerHTML=data.percentIncrease + '%';
 	updateGenderAndAge(error, genderInfo, ageInfo);
 	updateTimeChart(timeMessages);
+	updatePredictionChart(predictions);
 };
 
 var handleZipcodeClick = function() {
 	entry = document.getElementById("zipSearchBox").value;
 	if (entry) {
 		var yea = clicked(d3.json("/find/"+entry));
-		console.log(yea);
 	}
 };
 

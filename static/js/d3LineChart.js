@@ -38,9 +38,9 @@ var updateTimeChart = function(timeMessages) {
 		var yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(10);
 		var t = null;
 
-		svgTime = d3.select('#chart').select('svg').select('g');
+		svgTime = d3.selectAll('#chart').select('svg').select('g');
 		if (svgTime.empty()) {
-			svgTime = d3.select('#chart')
+			svgTime = d3.selectAll('#chart')
 				.append('svg:svg')
 					.attr('width', w)
 					.attr('height', h)

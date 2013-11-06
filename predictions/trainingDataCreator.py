@@ -1,5 +1,6 @@
 from message.models import Message
 from django.db.models import Sum, Count
+import datetime
 
 
 from numpy import *#arange,array,ones#,random,linalg
@@ -37,7 +38,7 @@ def test():
 	slope, intercept, r_value, p_value, std_err = stats.linregress(xi,y)
 
 	print 'r value', r_value
-	print  'p_value', p_value
+	print 'p_value', p_value
 	print 'standard deviation', std_err
 
 	line = slope*xi+intercept
@@ -45,8 +46,9 @@ def test():
 	show()
 
 def polyTest():
-	x = [19, 20, 20.5, 21.5, 22, 23, 23.8, 25.5, 29]
-	y = [20, 20.5, 21.5, 22, 23, 23, 25.5, 24, 8]
+	messages = Message.objects.all().values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
+	x = [convertToInt(m['writtenDate']) for m in messages]
+	y = [m['num'] for m in messages]
 
 	# fit the data with a 4th degree polynomial
 	z4 = polyfit(x, y, 4) 
@@ -58,6 +60,18 @@ def polyTest():
 	xx = linspace(0, 30, 100)
 	pylab.plot(x, y, 'o', xx, p4(xx),'-g', xx, p5(xx),'-b')
 	pylab.legend(['data to fit', '4th degree poly', '5th degree poly'])
-	pylab.axis([18,30,7,30])
+	#pylab.axis([18,30,7,30])
 	pylab.show()
 
+def convertToInt(date):
+	return (date-datetime.date(2008, 1, 1)).total_seconds()
+
+def getPredictions(state):
+	if state == 'US':
+		messages = Message.objects.all().values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
+	else:
+		messages = Message.objects.filter(state__exact=state).values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
+	x = [convertToInt(m['writtenDate']) for m in messages]
+	y = [m['num'] for m in messages]
+	z5 = polyfit(x, y, 5)
+	return z5

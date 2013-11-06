@@ -52,6 +52,7 @@ urlpatterns = patterns('',
 
     # Predictions
     url(r'^createpredictions/$', predictions.views.CreatePredictions),    
+    url(r'^getpredictions/(?P<state>[A-Z]{2})$', predictions.views.GetPredictions),    
 
     # Upload
     url(r'^uploadlargedata/$', uploadXML.views.UploadLargeData)

@@ -21,7 +21,7 @@ updateGenderAndAge = function(error, gender, ageInfo) {
 	    .orient("left")
 	    .tickFormat(function(d) { return d; });
 	 
-	var svg = d3.select("#ageDistribution").append("svg")
+	var svg = d3.selectAll("#ageDistribution").append("svg")
 	    .attr("width", width + margin.left + margin.right)
 	    .attr("height", height + margin.top + margin.bottom)
 	  .append("g")
@@ -35,7 +35,10 @@ updateGenderAndAge = function(error, gender, ageInfo) {
 	  });
 	 
 	  x.domain(data.map(function(d) { return d.age; }));
-	  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+	  y.domain([0, d3.max(data, function(d) { 
+	  	if (d) return d.frequency; 
+	  	else return 0;
+	  })]);
 	 
 	  svg.append("g")
 	      .attr("class", "x axis")
@@ -94,6 +97,9 @@ updateGenderAndAge = function(error, gender, ageInfo) {
 	  }
 	};
 	var ages = [];
+	for (var i = 0; i < 10; i++) {
+		ages[i] = {'age':(i*10)+'-'+(i*10+9), 'frequency':0};
+	}
 	for (var i = 0; i < ageInfo.length; i++) {
 		var key = Math.floor(ageInfo[i].pk/10);
 		var age = ages[key];
@@ -101,8 +107,10 @@ updateGenderAndAge = function(error, gender, ageInfo) {
 			age = {'age':(key*10)+'-'+(key*10+9), 'frequency':0};
 		}
 		age.frequency += ageInfo[i].fields.num_cases; 
-		ages[key] = age;
+		if (key >= 0)
+			ages[key] = age;
 	}
+	
 	displayAge(error, ages);
 
 	/* Gender pie chart */
@@ -121,7 +129,7 @@ updateGenderAndAge = function(error, gender, ageInfo) {
 	.sort(null)
 	.value(function(d) { return d.population; });
 
-	var svgGender = d3.select("#genderSplit").append("svg")
+	var svgGender = d3.selectAll("#genderSplit").append("svg")
 	.attr("width", widthGender)
 	.attr("height", heightGender)
 	.append("g")

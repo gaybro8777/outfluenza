@@ -12,6 +12,13 @@ path {
 	fill: none;
 }
 
+.path_predict {
+	stroke: #1D96E7;
+	stroke-width: 1;
+	stroke-dasharray: 0;
+	fill: none;
+}
+
 .area {
   	fill: #cdffff;
 }

@@ -52,7 +52,6 @@ def orderCountiesFromState(state):
 	counties = sorted(counties, key=lambda county: - county['num_male_cases'] - county['num_female_cases'])
 	assignBuckets(counties)
 	counties = [County().populate(c['county'], c['num_male_cases'], c['num_female_cases'], c['bucket']) for c in counties]
-	print(counties)
 	return counties
 
 def orderMessagesIntoSortedStates():

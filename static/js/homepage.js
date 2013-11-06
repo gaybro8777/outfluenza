@@ -7,13 +7,15 @@ queue()
     .defer(d3.json, "/genderjson/US")
     .defer(d3.json, "/agejson/US")
     .defer(d3.json, "/statetimegraphjson/US")
+    .defer(d3.json, "/getpredictions/US")
     .await(ready);
 
-function ready(error, us, states, topZipcodes, genderUS, ageUS, timeUS) {
+function ready(error, us, states, topZipcodes, genderUS, ageUS, timeUS, predictions) {
   updateTopStateStats(error, states);
 	updateTopZipcodeStats(error, topZipcodes);
   updateGenderAndAge(error, genderUS, ageUS);
   updateTimeChart(timeUS);
+  updatePredictionChart(predictions);
 	globalUS = us;
 	updateMap(error, us, states);
 	//updateStatistics(error, stateStatistics);
