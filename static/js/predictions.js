@@ -2,17 +2,17 @@ var updatePredictionChart = function(predictions) {
 
 	var formatPrediction = function(prediction) {
 		var baseDate = new Date();
-		baseDate.setFullYear(2008,1,1);
+		baseDate.setFullYear(2013,1,1);
 		var startDate=new Date();
-		startDate.setFullYear(2013,11,1);
+		startDate.setFullYear(2013,1,1);
 		var data = [];
 		var calcNum = function(date, prediction) {
-			var x = (+date - +baseDate)/1000;
-			var y = parseFloat(prediction.fields.theta0) + 
-				parseFloat(prediction.fields.theta1) * x +
+			var x = (+date - +baseDate)/(1000*60*60*24);
+			var y = parseFloat(prediction.fields.theta4) + 
+				parseFloat(prediction.fields.theta3) * x +
 				parseFloat(prediction.fields.theta2) * x * x +
-				parseFloat(prediction.fields.theta3) * x * x * x +
-				parseFloat(prediction.fields.theta4) * x * x * x * x;
+				parseFloat(prediction.fields.theta1) * x * x * x +
+				parseFloat(prediction.fields.theta0) * x * x * x * x;
 			return y;
 		}
 		for (var i = 0; i <= 100; i++) {
@@ -28,8 +28,8 @@ var updatePredictionChart = function(predictions) {
 
 	var data = formatPrediction(predictions[0]);
 
-	var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    	width = 500 - margin.left - margin.right,
+	var margin = {top: 20, right: 20, bottom: 30, left: 120},
+    	width = 450 - margin.left - margin.right,
     	height = 250 - margin.top - margin.bottom;
 
 	var x = d3.time.scale()

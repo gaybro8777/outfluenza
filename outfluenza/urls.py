@@ -49,6 +49,9 @@ urlpatterns = patterns('',
     url(r'^state/(?P<state>[A-Z]{2})$', homepage.views.StateView, name = 'stateView'),
     url(r'^team/$', homepage.views.TeamView),
     url(r'^instructions/$', homepage.views.InstructionsView),
+    url(r'^forum/$', homepage.views.ForumView),
+    url(r'^signup/$', homepage.views.SignupView),
+    url(r'^login/$', homepage.views.LoginView),
 
     # Predictions
     url(r'^createpredictions/$', predictions.views.CreatePredictions),    

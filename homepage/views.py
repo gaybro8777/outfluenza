@@ -39,6 +39,21 @@ def InstructionsView(request):
 	context = RequestContext(request)
 	return HttpResponse(template.render(context))
 
+def ForumView(request):
+	template = loader.get_template('forum.html')
+	context = RequestContext(request)
+	return HttpResponse(template.render(context))
+
+def SignupView(request):
+	template = loader.get_template('signup.html')
+	context = RequestContext(request)
+	return HttpResponse(template.render(context))
+
+def LoginView(request):
+	template = loader.get_template('login.html')
+	context = RequestContext(request)
+	return HttpResponse(template.render(context))
+
 ################################
 # Search
 

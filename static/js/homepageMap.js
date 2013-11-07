@@ -120,10 +120,6 @@ var handleCounty = function(centered, x, y, k, width, height) {
 	}
 	else {
 		zipcodeNodes.selectAll('path').data([]).exit().remove();
-		d3.selectAll("#ageDistribution").selectAll('svg').data([]).exit().remove();
-		d3.selectAll("#genderSplit").selectAll('svg').data([]).exit().remove();
-		d3.selectAll("#chart").selectAll('svg').data([]).exit().remove();
-		d3.selectAll("#predictions").selectAll('svg').data([]).exit().remove();
 	}
 };
 
@@ -136,7 +132,6 @@ var clicked = function(d, width, height) {
 	if (d && centered !== d && d.properties.STUSPS10) {
 		centered = null;
 		handleCounty(centered, x, y, k, width, height);
-	    
 	    var centroid = path.centroid(d);
 	    x = centroid[0];
 	    y = centroid[1];
@@ -174,6 +169,11 @@ var clicked = function(d, width, height) {
 	    k = 1;
 	    centered = null;
 		handleCounty(centered, x, y, k, width, height);
+		var stateObj = {};
+	    stateObj.properties = {};
+	    stateObj.properties.STUSPS10 = 'US';
+	    stateObj.properties.NAME10 = 'US';
+		handleStats(stateObj)
 		$("#stateTrends").css("display", "none");
 		$("#nationalTrends").fadeIn(2000);
 		$("#mapTitle").css("visibility", "visible");
@@ -205,6 +205,11 @@ var handleStats = function(stateObj) {
 };
 
 var readyState = function(error, stateJson, counties, genderInfo, ageInfo, timeMessages, metrics, predictions) {
+	
+		d3.selectAll("#ageDistribution").selectAll('svg').data([]).exit().remove();
+		d3.selectAll("#genderSplit").selectAll('svg').data([]).exit().remove();
+		d3.selectAll("#chart").selectAll('svg').data([]).exit().remove();
+		d3.selectAll("#predictions").selectAll('svg').data([]).exit().remove();
 	var data = metrics[0].fields;
 	document.getElementById("worstZipcode").innerHTML=data.worstZipcode;
 	document.getElementById("numRecentCases").innerHTML=data.numRecentCases + ' new cases';

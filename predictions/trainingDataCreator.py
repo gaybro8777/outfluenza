@@ -12,6 +12,9 @@ import pylab
 
 import random
 
+
+BASE_DATE = datetime.datetime(2013, 1, 1)
+
 def createTrainingData():
 	messages = Message.objects.values('zipcode', 'writtenDate').annotate(num_zip=Count('zipcode'),num_date=Count('writtenDate'))
 	f = open('test.csv', 'w')
@@ -46,7 +49,8 @@ def test():
 	show()
 
 def polyTest():
-	messages = Message.objects.all().values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
+	state = 'NY'
+	messages = Message.objects.filter(state__exact=state, writtenDate__gt=BASE_DATE).values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
 	x = [convertToInt(m['writtenDate']) for m in messages]
 	y = [m['num'] for m in messages]
 
@@ -57,21 +61,21 @@ def polyTest():
 	z5 = polyfit(x, y, 5)
 	p5 = poly1d(z5)
 
-	xx = linspace(0, 30, 100)
-	pylab.plot(x, y, 'o', xx, p4(xx),'-g', xx, p5(xx),'-b')
-	pylab.legend(['data to fit', '4th degree poly', '5th degree poly'])
+	xx = linspace(0, 1000, 100)
+	pylab.plot(x, y, 'o', x, p4(x),'-g', x, p5(x),'-b')
+	#pylab.legend(['data to fit', '4th degree poly', '5th degree poly'])
 	#pylab.axis([18,30,7,30])
 	pylab.show()
 
 def convertToInt(date):
-	return (date-datetime.date(2008, 1, 1)).total_seconds()
+	return (date-datetime.date(2013, 1, 1)).total_seconds() / (60*60*24)
 
 def getPredictions(state):
 	if state == 'US':
-		messages = Message.objects.all().values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
+		messages = Message.objects.filter(writtenDate__gt=BASE_DATE).values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
 	else:
-		messages = Message.objects.filter(state__exact=state).values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
+		messages = Message.objects.filter(state__exact=state, writtenDate__gt=BASE_DATE).values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
 	x = [convertToInt(m['writtenDate']) for m in messages]
 	y = [m['num'] for m in messages]
-	z5 = polyfit(x, y, 5)
+	z5 = polyfit(x, y, 5);
 	return z5
