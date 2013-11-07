@@ -15,7 +15,7 @@ var updatePredictionChart = function(predictions) {
 				parseFloat(prediction.fields.theta0) * x * x * x * x;
 			return y;
 		}
-		for (var i = 0; i <= 100; i++) {
+		for (var i = 0; i <= 30; i++) {
 			var d = {};
 			var currDate = new Date();
 			currDate.setTime(startDate.getTime() + 86400000*10*i);
@@ -28,7 +28,7 @@ var updatePredictionChart = function(predictions) {
 
 	var data = formatPrediction(predictions[0]);
 
-	var margin = {top: 20, right: 20, bottom: 30, left: 120},
+	var margin = {top: 20, right: 20, bottom: 30, left: 50},
     	width = 450 - margin.left - margin.right,
     	height = 250 - margin.top - margin.bottom;
 

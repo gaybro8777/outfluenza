@@ -50,25 +50,28 @@ def test():
 
 def polyTest():
 	state = 'NY'
-	messages = Message.objects.filter(state__exact=state, writtenDate__gt=BASE_DATE).values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
+	messages = Message.objects.filter( writtenDate__gt=BASE_DATE).values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
 	x = [convertToInt(m['writtenDate']) for m in messages]
 	y = [m['num'] for m in messages]
 
-	# fit the data with a 4th degree polynomial
-	z4 = polyfit(x, y, 4) 
-	p4 = poly1d(z4) # construct the polynomial 
-
-	z5 = polyfit(x, y, 5)
+	z5 = polyfit(x, y, 4)
 	p5 = poly1d(z5)
 
 	xx = linspace(0, 1000, 100)
-	pylab.plot(x, y, 'o', x, p4(x),'-g', x, p5(x),'-b')
+	pylab.plot(x, y, 'o', x, getY(z5, x),'-g', x, p5(x),'-b')
 	#pylab.legend(['data to fit', '4th degree poly', '5th degree poly'])
 	#pylab.axis([18,30,7,30])
 	pylab.show()
 
 def convertToInt(date):
 	return (date-datetime.date(2013, 1, 1)).total_seconds() / (60*60*24)
+
+def getY(theta, x_list):
+	return [theta[0] * x * x * x * x + 
+		theta[1] * x * x * x + 
+		theta[2] * x * x + 
+		theta[3] * x + 
+		theta[4] for x in x_list]
 
 def getPredictions(state):
 	if state == 'US':
@@ -77,5 +80,5 @@ def getPredictions(state):
 		messages = Message.objects.filter(state__exact=state, writtenDate__gt=BASE_DATE).values('writtenDate').annotate(num = Count('writtenDate')).order_by('writtenDate')
 	x = [convertToInt(m['writtenDate']) for m in messages]
 	y = [m['num'] for m in messages]
-	z5 = polyfit(x, y, 5);
+	z5 = polyfit(x, y, 4);
 	return z5
