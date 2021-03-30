@@ -24,4 +24,4 @@ ipython==1.1.0
 PyQt-mac-gpl==4.10.3
 zeromq==3.2.3
 pyzmq==14.0.0
-Pygments==1.6
+Pygments==2.7.4
